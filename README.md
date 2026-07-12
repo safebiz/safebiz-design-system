@@ -6,10 +6,23 @@ Sistem de design (tokeni + componente React) pentru **Safebiz Solutions**, compa
 
 Repo-ul e gândit ca „frontend-focused subfolder": tokeni + componente React care predau brand-ul. Claude Design citește:
 - `src/styles/tokens.css` — sursa unică de adevăr pentru culori, fonturi, spacing, radii
-- `src/components/*` — componentele reale (Button, Card, ServiceCard, Hero, Header, Footer…)
-- `src/data/content.ts` — conținut REAL Safebiz (fără lorem ipsum)
+- `src/components/*` — componentele reale
+- `src/data/content.ts` — conținut REAL Safebiz (fără lorem ipsum), inclusiv catalogul complet de servicii
 - `public/logo/*` — toate variantele de logo
-- `src/App.tsx` — pagina-showcase care compune totul (hero + servicii + despre + footer + style guide)
+- `src/App.tsx` — pagina-showcase care compune totul
+
+### Componente disponibile
+Core: `Button`, `Badge`, `Card`, `SectionHeading`.
+Marketing/pagini: `Header`, `Hero`, `Footer`, `ServiceCard`, `ServicesOverview` (toate serviciile grupate pe 6 categorii), `PricingPlans` (planuri mentenanță Start/Pro/VIP), `AuditLanding` (șablon „audit gratuit → formular", reutilizabil pt GDPR/retragere/SEO), `FAQ` (accordion), `Testimonials`, `EmailTemplate` (șablon email marketing de brand).
+
+### Catalogul de servicii (6 categorii, în `content.ts`)
+1. **Web & Magazine** · 2. **SEO & Vizibilitate** · 3. **Conformitate & Legal** · 4. **Automatizări & Integrări** · 5. **Mentenanță & Suport** · 6. **Marketing & Branding**. Plus flagship **All-In-One**.
+Fiecare serviciu are un `status`: `live` (pe site) / `ready` (gata, ofertat) / `blocked` (conținut gata, publicare gată separat).
+
+⚠️ **Servicii `blocked` (design OK, publicare NU fără GO):** „Audit retragere online (OUG 18/2026)" și „Conformitate HoReCa (948/2026)" — copy generic-sigur, fără claim-uri juridice neverificate. Nu publica paginile lor reale fără aprobare + sign-off avocat.
+
+📧 **EmailTemplate** e un mockup de brand. În producție se traduce în HTML table-based cu stiluri inline pentru FluentCRM / SureContact.
+🗣️ **Testimonials** conține PLACEHOLDER — înlocuiește cu recenzii reale (cu acord) înainte de publicare; nu folosi text inventat.
 
 ## Reguli de brand (OBLIGATORII)
 

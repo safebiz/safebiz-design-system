@@ -1,12 +1,17 @@
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { Footer } from './components/Footer'
-import { ServiceCard } from './components/ServiceCard'
 import { SectionHeading } from './components/SectionHeading'
 import { Card } from './components/Card'
 import { Badge } from './components/Badge'
 import { Button } from './components/Button'
-import { services, team } from './data/content'
+import { ServicesOverview } from './components/ServicesOverview'
+import { PricingPlans } from './components/PricingPlans'
+import { AuditLanding } from './components/AuditLanding'
+import { FAQ } from './components/FAQ'
+import { Testimonials } from './components/Testimonials'
+import { EmailTemplate } from './components/EmailTemplate'
+import { team, flagship } from './data/content'
 
 const palette = [
   { name: 'Zomp (brand/CTA)', hex: '#14a68b' },
@@ -23,21 +28,26 @@ export function App() {
       <Header />
       <Hero />
 
-      {/* Servicii */}
-      <section id="servicii" className="section">
+      {/* Toate serviciile — grupate pe 6 categorii */}
+      <ServicesOverview />
+
+      {/* Flagship All-In-One */}
+      <section className="section section--alt">
         <div className="container">
-          <SectionHeading
-            eyebrow="Ce facem"
-            title="Serviciile Safebiz"
-            subtitle="Un singur partener pentru tot ce înseamnă prezența ta online — de la construcție la conformitate."
-          />
-          <div className="grid grid--3">
-            {services.map((s) => (
-              <ServiceCard key={s.title} {...s} />
-            ))}
-          </div>
+          <Card style={{ textAlign: 'center', background: 'var(--gradient-hero)', border: 'none', color: '#fff' }}>
+            <Badge variant="success">Cel mai popular</Badge>
+            <h2 style={{ color: '#fff', marginTop: '1rem' }}>{flagship.title}</h2>
+            <p style={{ maxWidth: 620, margin: '0 auto 1.5rem', color: 'rgba(255,255,255,0.85)' }}>{flagship.text}</p>
+            <Button variant="on-dark" href="/cerere-oferta">Cerere ofertă</Button>
+          </Card>
         </div>
       </section>
+
+      {/* Planuri mentenanță */}
+      <PricingPlans />
+
+      {/* Landing audit (lead-magnet) */}
+      <AuditLanding />
 
       {/* Despre noi */}
       <section id="despre" className="section section--alt">
@@ -58,6 +68,15 @@ export function App() {
           </div>
         </div>
       </section>
+
+      {/* Testimoniale (placeholder — a se completa cu recenzii reale) */}
+      <Testimonials />
+
+      {/* FAQ */}
+      <FAQ />
+
+      {/* Șablon email marketing */}
+      <EmailTemplate />
 
       {/* CTA final */}
       <section className="section">
@@ -98,7 +117,7 @@ export function App() {
             <p style={{ fontSize: 'var(--fs-lead)', color: 'var(--color-text-muted)' }}>
               Lead / subheadline — Inter Regular. Diacritice: ă î â ș ț.
             </p>
-            <p>Body text — Inter Regular, ~18px, line-height 1.6. Lizibil pe text lung, cu diacritice românești corecte.</p>
+            <p>Body text — Inter Regular, ~18px, line-height 1.6.</p>
           </div>
 
           <h3>Butoane & badge-uri</h3>

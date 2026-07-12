@@ -128,3 +128,80 @@ a:hover { color: var(--color-brand-hover); }
 .swatch__meta { padding: var(--space-3); font-size: var(--fs-small); }
 .swatch__meta strong { display: block; color: var(--color-ink); }
 .swatch__meta code { color: var(--color-text-muted); }
+
+/* ---- Container narrow -------------------------------------------------- */
+.container--narrow { max-width: 780px; }
+
+/* ---- Services overview (grupuri) -------------------------------------- */
+.svc-group { margin-bottom: var(--space-16); }
+.svc-group__head { margin-bottom: var(--space-6); }
+.svc-group__head h3 { margin-bottom: var(--space-2); }
+.svc-group__head p { color: var(--color-text-muted); margin: 0; }
+.service-card h4 { font-family: var(--font-heading); font-size: 1.15rem; font-weight: var(--fw-semibold);
+  color: var(--color-ink); margin: 0 0 var(--space-2); display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; }
+.service-card--btn { text-align: left; cursor: pointer; font: inherit; width: 100%; }
+.tag-soon { font-size: 0.72rem; font-weight: var(--fw-semibold); text-transform: uppercase; letter-spacing: 0.04em;
+  color: var(--color-brand-hover); background: var(--color-accent-light); padding: 2px 8px; border-radius: var(--radius-pill); }
+
+/* ---- Pricing plans ---------------------------------------------------- */
+.pricing .plan { display: flex; flex-direction: column; position: relative; }
+.plan--highlight { border: 2px solid var(--color-brand); box-shadow: var(--shadow-md); }
+.plan__ribbon { position: absolute; top: -14px; left: var(--space-8); }
+.plan__name { margin-bottom: var(--space-1); }
+.plan__tagline { color: var(--color-text-muted); font-size: var(--fs-small); margin-bottom: var(--space-4); }
+.plan__price { margin-bottom: var(--space-6); }
+.plan__amount { font-family: var(--font-heading); font-size: 2.4rem; font-weight: var(--fw-bold); color: var(--color-ink); }
+.plan__unit { color: var(--color-text-muted); font-size: var(--fs-small); margin-left: var(--space-2); }
+.plan__features { list-style: none; padding: 0; margin: 0 0 var(--space-6); display: flex; flex-direction: column; gap: var(--space-3); flex: 1; }
+.plan__features li { position: relative; padding-left: 1.6rem; color: var(--color-text); }
+.plan__features li::before { content: '✓'; position: absolute; left: 0; color: var(--color-brand); font-weight: var(--fw-bold); }
+.pricing__note { text-align: center; color: var(--color-text-muted); font-size: var(--fs-small); margin-top: var(--space-8); }
+
+/* ---- Audit landing ---------------------------------------------------- */
+.audit__grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: var(--space-12); align-items: center; }
+.audit__lead { font-size: var(--fs-lead); color: var(--color-text-muted); margin-bottom: var(--space-8); }
+.audit__card { background: var(--color-bg-alt); }
+.checklist { list-style: none; padding: 0; margin: var(--space-4) 0 0; display: flex; flex-direction: column; gap: var(--space-3); }
+.checklist li { display: flex; gap: var(--space-3); align-items: flex-start; }
+.checklist__mark { display: inline-grid; place-items: center; width: 22px; height: 22px; flex: none;
+  border-radius: var(--radius-pill); background: var(--color-success); color: #fff; font-size: 0.8rem; }
+@media (max-width: 820px) { .audit__grid { grid-template-columns: 1fr; } }
+
+/* ---- FAQ -------------------------------------------------------------- */
+.faq { border-top: 1px solid var(--color-border); }
+.faq__item { border-bottom: 1px solid var(--color-border); }
+.faq__q { width: 100%; background: none; border: none; cursor: pointer; font: inherit; font-weight: var(--fw-semibold);
+  color: var(--color-ink); padding: var(--space-4) 0; display: flex; justify-content: space-between; align-items: center; gap: var(--space-4); text-align: left; }
+.faq__icon { color: var(--color-brand); font-size: 1.4rem; line-height: 1; flex: none; }
+.faq__a { color: var(--color-text-muted); margin: 0 0 var(--space-4); max-width: 90%; }
+
+/* ---- Testimonials ----------------------------------------------------- */
+.testimonial { margin: 0; display: flex; flex-direction: column; gap: var(--space-3); }
+.testimonial__stars { color: var(--color-brand); letter-spacing: 2px; }
+.testimonial__quote { margin: 0; font-size: 1.05rem; color: var(--color-text); }
+.testimonial__who { display: flex; flex-direction: column; margin-top: auto; }
+.testimonial__who strong { color: var(--color-ink); }
+.testimonial__who span { color: var(--color-text-muted); font-size: var(--fs-small); }
+
+/* ---- Email marketing template ----------------------------------------- */
+.email-meta { background: var(--color-bg-alt); border: 1px solid var(--color-border); border-radius: var(--radius-md);
+  padding: var(--space-4); font-size: var(--fs-small); color: var(--color-text-muted); margin-bottom: var(--space-6); }
+.email-meta span { font-weight: var(--fw-semibold); color: var(--color-ink); }
+.email { max-width: 600px; margin: 0 auto; border: 1px solid var(--color-border); border-radius: var(--radius-md);
+  overflow: hidden; box-shadow: var(--shadow-md); background: #fff; }
+.email__header { padding: var(--space-6); border-bottom: 3px solid var(--color-brand); text-align: center; }
+.email__hero { background: var(--gradient-hero, linear-gradient(135deg, #0a2239, #123049)); color: #fff; padding: var(--space-8) var(--space-6); }
+.email__eyebrow { color: var(--color-accent-light); font-size: var(--fs-small); font-weight: var(--fw-semibold);
+  text-transform: uppercase; letter-spacing: 0.08em; }
+.email__headline { color: #fff; font-size: 1.5rem; margin: var(--space-2) 0 0; }
+.email__body { padding: var(--space-8) var(--space-6); }
+.email__body p { color: var(--color-text); }
+.email__bullets { list-style: none; padding: 0; margin: var(--space-4) 0; display: flex; flex-direction: column; gap: var(--space-3); }
+.email__bullets li { display: flex; gap: var(--space-3); }
+.email__bullets li span { color: var(--color-brand); font-weight: var(--fw-bold); }
+.email__cta-wrap { text-align: center; margin: var(--space-8) 0; }
+.email__sig { font-weight: var(--fw-semibold); color: var(--color-ink); }
+.email__footer { background: var(--color-ink); color: rgba(255,255,255,0.75); padding: var(--space-6); text-align: center; font-size: var(--fs-small); }
+.email__footer p { margin: 0 0 var(--space-2); }
+.email__footer a { color: var(--color-accent-light); }
+.email__unsub { font-size: 0.8rem; color: rgba(255,255,255,0.5); }
