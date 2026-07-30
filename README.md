@@ -8,6 +8,8 @@ Repo-ul e gândit ca „frontend-focused subfolder": tokeni + componente React c
 - `src/styles/tokens.css` — sursa unică de adevăr pentru culori, fonturi, spacing, radii
 - `src/components/*` — componentele reale
 - `src/data/content.ts` — conținut REAL Safebiz (fără lorem ipsum), inclusiv catalogul complet de servicii
+- `src/data/voice.ts` — **regulile de voce**: persoană, cei 4 piloni, ton, casing, structura CTA, semnături de autor
+- `src/data/phrases.ts` — **fraze interzise (~60) și signature (~30)**, cu helperi de verificare
 - `public/logo/*` — toate variantele de logo
 - `src/App.tsx` — pagina-showcase care compune totul
 
@@ -39,6 +41,45 @@ Fiecare serviciu are un `status`: `live` (pe site) / `ready` (gata, ofertat) / `
 Profesional, pragmatic, „încredere + tehnologie". Fără clișee, fără efecte inutile.
 **Diferențiator unic de evidențiat:** avocat GDPR **in-house** — tehnic + juridic sub același acoperiș.
 Diacritice românești corecte obligatoriu (ă, î, â, ș, ț).
+
+## Voice & copy rules (OBLIGATORII)
+
+> Detaliile executabile sunt în `src/data/voice.ts` + `src/data/phrases.ts`. **Citește-le înainte de a scrie orice copy.**
+
+### Persoana — DOUĂ jumătăți, ambele obligatorii
+- **„noi"** = Safebiz: „am implementat", „am observat", „noi recomandăm". Minim **3 apariții** per articol.
+- **„tu"** = cititorul: „afacerea ta". Cald, dar profesional.
+- **Impersonal e INTERZIS.** „Se recomandă", „este important să se" — nu.
+
+Taglineul folosește ambele: *„**Noi** gestionăm complexitatea tehnologiei, pentru ca **tu** să primești înapoi timpul necesar afacerii tale."*
+
+### Cei 4 piloni — minim 1 per conținut
+**Know-how tehnic** (stack-uri și decizii reale) · **Time Saving** (cuantificat: „5 ore/lună", nu „economisești timp") · **All-in-One** (pachet integrat, un singur partener) · **Diferențiator juridic** (avocat in-house, pe conținut cu impact legal).
+
+### Cifre, nu adjective
+Minim **2 cifre concrete** per articol. „comision 31-35%" bate „comisioane mari". „43% din trafic ajunge pe poziția 1" bate „mult trafic".
+
+### Structura CTA în articole
+Minim **2 CTA-uri intercalate**, niciodată doar la final:
+- **primul la 30–40% din articol** — soft, educațional: „Vezi cum implementăm asta concret →"
+- **al doilea la final** — direct, transacțional: „Solicită audit gratuit", „Vezi pachete"
+
+**Exact un CTA per poziție.** Un articol cu mai multe tag-uri are un singur tag *principal*, care alege oferta — criteriul: oferta care **are** deja formular.
+
+### Casing
+Sentence case în body · Title Case selectiv la titluri · eyebrow UPPERCASE cu letter-spacing · **zero emoji în proză** (iconițele sunt Lucide).
+
+### 🔴 Fraze interzise — atenție la butoane
+`phrases.ts` → `forbidden` are ~60 de fraze **aplicate automat** (etapa de editor respinge articolul). Câteva ar ajunge direct pe un CTA: **„click aici", „apasă aici", „acționează acum", „nu rata", „ofertă limitată", „oferta expiră", „ultimele locuri", „100% gratis", „garantat 100%"**. Plus superlative („cel mai bun"), clișee AI („în era digitală"), închideri generice („în concluzie").
+
+`phrases.ts` → `signature` are ~30 de fraze de identitate; **minim una** per articol.
+
+### Semnături de autor
+`Zoltán Takács, Safebiz Solutions` (tehnic) · `Kata Takács (avocat), Safebiz Solutions` (juridic) · `Echipa Safebiz — Zoltán Takács & Kata Takács` (GDPR + tehnic — aici e diferențiatorul) · `Echipa Safebiz Solutions` (generic).
+*Notă: numele afișate în „Despre noi" (`content.ts` → `team`) sunt cele legale complete; formele de semnătură diferă intenționat.*
+
+### Sursa umană și direcția de sincronizare
+`voice.ts` și `phrases.ts` sunt **oglinda** fișierelor din `projects/safebiz/branding/` (`voice.md`, `forbidden_phrases.txt`, `signature_phrases.txt`). Sincronizarea merge **doar** dinspre `branding/` spre repo. Nu edita regulile aici întâi — s-ar crea o a patra sursă care se învechește.
 
 ## Rulare locală (opțional)
 ```bash
