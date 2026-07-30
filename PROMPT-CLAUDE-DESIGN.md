@@ -338,3 +338,149 @@ Pentru fiecare din `templates/{articol,categorie,blog}`:
 5. La final, spune explicit ce ai lăsat neschimbat și de ce.
 
 Ce **nu** face parte din revizuire: header, footer, meniul de navigație (batch separat).
+
+---
+
+## 10. Batch 2 — trunchiul comercial
+
+Patru ecrane: **`Safebiz Pagina Vanzare.html`** · **`Safebiz Despre Noi.html`** · **`Safebiz Portofoliu.html`** · **`Safebiz Multumim.html`**.
+
+**🔴 Înainte de orice: mobilul se desenează de la început, nu se repară la final.** Batch 1 a fost livrat cu previzualizare doar la 1280px și a cerut o rundă întreagă de revizuire (§9). Pentru Batch 2, fiecare ecran primește **din prima** două previzualizări în `data-props`: **1280** și **390×844**. Regulile 1–6 din §3b sunt condiție de livrare, nu sugestii.
+
+**De ce acest batch acum:** cele 9 pagini de serviciu existente sunt construite fiecare altfel — nu au nimic în comun în afară de header. Un singur șablon din care se reconstruiesc toate e cel mai mare câștig unitar din tot redesign-ul. Iar „Despre noi" și „Portofoliu" **nu există deloc**: un site de agenție fără dovezi și fără oameni cere încredere pe care nu o arată nicăieri.
+
+### Ecran 4 — `Safebiz Pagina Vanzare.html` 🔴 prioritatea 1
+
+**Instanța de desenat: serviciul „Magazin online".** Alege-l fiindcă are cifre reale și verificabile: agregatorii de livrare iau **31–35% comision** pe fiecare comandă, iar un magazin propriu ia 0%. Folosește-le — §4 cere minim 2 cifre concrete.
+
+**Dar desenează un ȘABLON, nu o pagină.** Aceleași secțiuni trebuie să funcționeze pentru: site de prezentare · conformitate GDPR · automatizări · mentenanță WordPress · Google My Business · tracking și analytics · licențe premium · pensiune și hotel. Deci nicio secțiune nu presupune e-commerce în structură, ci doar în copy.
+
+| # | Secțiune | Detalii |
+|---|---|---|
+| 1 | Hero de serviciu | `--gradient-hero`, breadcrumb accent-light, eyebrow = categoria de serviciu, H1 = promisiunea (nu numele serviciului), p fs-lead alb 85%, **2 butoane**: `primary` „Cere ofertă" + `on-dark` „Vezi pachete". Dreapta: dovadă vizuală (mockup 4:3 sau bloc de cifră mare) |
+| 2 | Bandă încredere | **Trust strip existent** — 4 iteme cu iconiță Zomp |
+| 3 | Problema | 3 dureri în limbajul clientului, nu al nostru. 3 coloane, iconiță Lucide + titlu scurt + 2 rânduri. **Fără roșu** (§3, avertisment 2) — durerile se marchează cu ink, nu cu alarmă |
+| 4 | Ce include | grilă de 6 infoboxuri cu bifă `success`, 3→2→1 coloane |
+| 5 | **🎯 Cum lucrăm — COMPONENTĂ NOUĂ: `Timeline`** | 4 pași orizontali pe desktop, verticali pe mobil. Fiecare pas: număr în cerc (`--color-brand`, text ink — §3 avertisment 6), titlu, 2 rânduri, durată estimată. Linia care leagă pașii = 2px `--color-border`, **nu** gradient |
+| 6 | Rezultat | o cifră mare (`--fs-h1`, `--fw-extrabold`, `--color-brand`) + context într-o frază + un citat scurt de client. Trimite spre studiul de caz complet |
+| 7 | **🎯 Pachete** | 3 coloane. Verifică ÎNTÂI dacă `PricingPlans` (Start/Pro/VIP, `plan--highlight`, `plan__ribbon`) acoperă cazul. Dacă da, **refolosește-l** și spune asta explicit. Dacă nu, extinde-l — nu construi o a doua componentă de preț |
+| 8 | **🎯 Ce NU include — COMPONENTĂ NOUĂ** | listă cu 4 iteme, iconiță „minus" în cerc `--color-border`, text muted. Ton neutru, informativ. Scade cererile nepotrivite și e o formă de respect, nu un disclaimer |
+| 9 | Testimoniale | **`Testimonials` existent**, filtrate pe serviciu (2–3) |
+| 10 | FAQ | **`FAQ` existent**, 5 întrebări specifice serviciului |
+| 11 | **🎯 Servicii conexe — COMPONENTĂ NOUĂ** | 3 carduri de cross-sell, mai mici decât `ServiceCard`: iconiță + titlu + o linie + „Vezi serviciul →" |
+| 12 | CTA final | **Flagship refolosit** |
+| 13 | Formular inline | câmpuri reale: nume, email, telefon, „ce ai acum" (select), mesaj + linie de consimțământ. **Nu inventa câmpuri** — se leagă la un SureForms existent |
+
+**Maximum 4 componente noi**: `Timeline`, „Ce NU include", „Servicii conexe", plus eventual extinderea `PricingPlans`. Restul e refolosire. Dacă ajungi la a cincea, oprește-te și spune de ce.
+
+### Ecran 5 — `Safebiz Despre Noi.html`
+
+Date reale, nu placeholder: **Sfântu Gheorghe, județul Covasna** · trilingv RO/HU/EN · avocat in-house (rolul, nu numele, în design) · parteneri tehnici Kadence, WPML, xCloud.
+
+| # | Secțiune | Detalii |
+|---|---|---|
+| 1 | Hero | gradient, H1 despre ce facem pentru client — **nu** „Despre noi" ca titlu |
+| 2 | Povestea | 2 coloane: text (3 paragrafe) + imagine. Persoana I plural, obligatoriu (§4) |
+| 3 | Cifre | 4 cifre mari pe bg-alt: ani, site-uri administrate, timp mediu de răspuns, limbi |
+| 4 | Diferențiatorul | bandă ink: **„Tehnic + juridic, sub același acoperiș"** — argumentul central al firmei, cu 3 bife |
+| 5 | Echipa | **🔴 nu există bloc „person" în Kadence** (§6.1). Card compus: foto rotundă 120px, nume, rol, 2 rânduri, 2 linkuri. Grid 3→2→1. **Trebuie să arate bine și cu 2 persoane, și cu 5** |
+| 6 | Cum lucrăm | refolosește `Timeline` din ecranul 4 |
+| 7 | Parteneri | logo-uri pe un rând, grayscale → color la hover |
+| 8 | Acoperire | Covasna, Harghita, Mureș + „lucrăm la distanță în toată țara" |
+| 9 | CTA final | Flagship |
+
+### Ecran 6 — `Safebiz Portofoliu.html`
+
+**🔴 Constrângere care nu e negociabilă:** nu s-a decis dacă publicăm nume de clienți. Desenează cu **etichete de tip „Magazin online, Covasna"** în loc de nume de firmă, și lasă un slot vizibil unde numele ar intra. Nu inventa nume de clienți reali.
+
+| # | Secțiune | Detalii |
+|---|---|---|
+| 1 | Hero | mai scurt decât cel de serviciu, cu 2 cifre de context |
+| 2 | Filtru | `Badge`-uri pe tip de serviciu — aceeași bandă ca la Categorie (§5, ecran 2) |
+| 3 | Grilă proiecte | 3→2→1. Card: captură 16:10, `Badge` serviciu, titlu, **o cifră de rezultat vizibilă pe card**, „Vezi proiectul →". Cifra pe card e ce diferențiază un portofoliu de o galerie |
+| 4 | Bandă de logo-uri | opțională, dependentă de decizia de mai sus — marcheaz-o ca atare |
+| 5 | CTA final | Flagship |
+
+### Ecran 7 — `Safebiz Multumim.html`
+
+Ecran scurt, dar face muncă reală: confirmă, spune ce urmează, și recuperează atenția în loc s-o piardă.
+
+| # | Secțiune | Detalii |
+|---|---|---|
+| 1 | Confirmare | iconiță bifă mare `--color-success` (text ink pe ea, §3 avertisment 6), H1 „Am primit cererea ta", o frază cu ce am primit |
+| 2 | Ce urmează | 3 pași numerotați cu **timpi reali**: „răspundem în aceeași zi lucrătoare" |
+| 3 | Între timp | 3 carduri: un articol relevant, un serviciu conex, auditul gratuit |
+| 4 | Contact direct | pentru cine nu vrea să aștepte — email, telefon, program |
+
+Fără header complet și fără footer complet: e o pagină de conversie. Nav redus la logo + un link înapoi.
+
+---
+
+## 11. Batch 3 — editorial specializat
+
+Patru ecrane: **`Safebiz Studiu de Caz.html`** · **`Safebiz Recenzie.html`** · **`Safebiz Ghid.html`** · **`Safebiz 404 si Cautare.html`**.
+
+**Aceeași regulă de mobil ca la Batch 2: două previzualizări din prima.**
+
+**🔴 Simplificare cerută explicit:** „studiu de caz" și „single proiect din portofoliu" sunt **același ecran**, cu două intrări. Nu desena două. Dacă crezi că trebuie separate, spune de ce înainte să le desenezi.
+
+### Ecran 8 — `Safebiz Studiu de Caz.html`
+
+Instanța: **automatizarea comenzilor** — 200 de comenzi × 3 minute de procesare manuală, mutate în cron, măsurate 90 de zile, ~10 ore recuperate lunar.
+
+| # | Secțiune | Detalii |
+|---|---|---|
+| 1 | Hero | breadcrumb, `Badge` serviciu, H1 = rezultatul, nu numele clientului. Bandă cu 3 cifre-cheie imediat sub H1 |
+| 2 | Fișa clientului | card lateral sau bandă: domeniu, mărime, servicii folosite, durată |
+| 3 | Provocarea | 2–3 paragrafe, în cuvintele clientului |
+| 4 | Ce am făcut | listă numerotată cu ce s-a implementat concret, cu nume de tehnologii |
+| 5 | **🎯 Rezultate — COMPONENTĂ NOUĂ: `MetricGrid`** | 3–4 cifre mari cu delta („−10 ore/lună", „+31% marjă"). **Săgeata verde/roșie e interzisă** — direcția se arată prin semn și cuvânt, nu prin culoare de alarmă (§3, avertisment 2) |
+| 6 | Tehnologii | `Badge` outline |
+| 7 | Citat client | `Testimonials` existent, o singură intrare, mare |
+| 8 | Înainte/după | opțional, 2 capturi comparate |
+| 9 | CTA final | Flagship, cu copy care leagă de serviciul folosit |
+| 10 | Alte studii | 3 carduri |
+
+### Ecran 9 — `Safebiz Recenzie.html`
+
+Există deja 5 recenzii în draft. Instanța: o recenzie de plugin WordPress.
+
+| # | Secțiune | Detalii |
+|---|---|---|
+| 1 | Cap de recenzie | ca articolul, plus `Badge` „Recenzie" |
+| 2 | **🎯 Verdict box** | card cu bordură 2px `--color-brand`: scor mare (`--fs-h1`), o frază de verdict, „pentru cine e" / „pentru cine nu e", preț, buton. Sus, imediat sub intro — cititorul care vrea doar concluzia o primește în primul ecran |
+| 3 | Pro / contra | 2 coloane: bife `success` stânga, minusuri în cerc `--color-border` dreapta. **Contra NU se colorează roșu** |
+| 4 | Corpul recenziei | ca articolul: H2, paragrafe, capturi |
+| 5 | Tabel comparativ | vs. 2 alternative, 4–5 criterii. Trebuie să deruleze orizontal pe mobil, în containerul lui |
+| 6 | **🎯 CTA de implementare** | diferențiatorul: „îl instalăm și îl configurăm noi". Ăsta e motivul comercial pentru care scriem recenzii |
+| 7 | FAQ + articole conexe | componente existente |
+
+### Ecran 10 — `Safebiz Ghid.html`
+
+Long-form pilon, 3000+ cuvinte. Diferă de articolul obișnuit prin **navigație**, nu prin stil.
+
+| # | Secțiune | Detalii |
+|---|---|---|
+| 1 | Hero de ghid | H1, subtitlu, „25 min de citit", data ultimei actualizări **vizibilă** — pe un pilon, prospețimea e semnal de încredere |
+| 2 | Cuprins sticky | pe desktop coloană stânga lipită, cu secțiunea curentă evidențiată. Pe mobil, pliat sus (deja implementat în Kadence) |
+| 3 | Capitole ancorate | H2 cu ancoră vizibilă la hover |
+| 4 | CTA după capitole | slot repetabil, **maximum 3 pe toată pagina** — §4 cere un singur CTA per poziție |
+| 5 | Bară de progres | subțire, sus, `--color-brand` |
+| 6 | Descarcă PDF | card la final |
+| 7 | „Înapoi sus" | flotant, mobil |
+
+### Ecran 11 — `Safebiz 404 si Cautare.html`
+
+Două ecrane mici într-un fișier, separate clar.
+
+- **404:** H1 uman (nu „Eroare 404"), câmp de căutare, 4 linkuri utile, buton spre acasă. Fără imagine amuzantă — brandul e sobru.
+- **Rezultate căutare:** câmp cu termenul păstrat, numărul de rezultate, listă de carduri, stare goală cu sugestii. **Starea goală se desenează explicit** — e cea mai des ratată și cea mai des văzută.
+
+---
+
+## 12. Ordinea de lucru și ce raportezi
+
+1. Batch 2 întâi, în ordinea 4 → 5 → 6 → 7. Ecranul 4 e prioritatea reală; celelalte se sprijină pe componentele lui.
+2. Batch 3 după ce Batch 2 e acceptat.
+3. La finalul fiecărui batch raportează: **ce componente noi ai creat** (cu motivul), **ce ai refolosit**, **ce ai extins**, și **ce nu ai putut face din tokenii existenți** — ultima categorie e cea mai utilă, fiindcă arată unde sistemul e prea sărac.
+4. Nu adăuga tokeni. Scala de spațiere are 9 pași deliberat (§3, avertisment 1). Dacă ai nevoie de un pas care nu există, spune-o în raport în loc să-l inventezi.
