@@ -22,7 +22,14 @@ Citește din repo, nu din memorie:
 | `src/components/*.tsx` | 14 componente reale |
 | `public/logo/*` | 9 variante de logo + favicon |
 
-🔴 **`tokens.css` din repo e lista COMPLETĂ de tokeni. Nu folosi niciunul care nu e acolo.** O variabilă CSS nedefinită invalidează **toată** declarația, tăcut — și fiindcă la rebuild tokenii se regenerează din repo, un token inventat în design dispare la următoarea generare, luând cu el fundalul sau mărimea care depindea de el. Dacă îți lipsește ceva, **spune-o explicit în livrare** ca să fie adăugat întâi în repo; nu-l folosi direct.
+🔴 **Repo-ul e lista COMPLETĂ — și pentru tokeni, și pentru variantele de componentă. Nu folosi nimic care nu e acolo.**
+
+Totul se regenerează din repo la fiecare rebuild, deci orice ai inventa în design dispare la următoarea generare — **tăcut, fără eroare**:
+
+- **token inexistent** → variabila CSS nedefinită invalidează *toată* declarația: fundal de hero pierdut, eyebrow la mărimea body-ului;
+- **variantă de componentă inexistentă** (`Badge variant="brand"`, `variant="outline"`) → cade pe `default`, iar banda de filtre își pierde complet distincția activ/inactiv.
+
+Dacă îți lipsește ceva, **spune-o explicit în livrare** ca să fie adăugat întâi în repo. Nu-l folosi direct.
 
 ---
 
@@ -109,7 +116,7 @@ Alb pe fundal închis = **`var(--color-text-on-dark)`**, nu `#fff`. Singura exce
 
 `--color-accent-light` (`#d0db97`) pe `--color-bg-alt` dă un contrast de **1,37:1** — practic invizibil. E o culoare de **fundal** și de eyebrow **pe ink**, nimic altceva.
 
-Pentru numerale decorative mari (01/02/03) pe fundal deschis folosește **`--color-brand`**. Pe fundal ink, accent-light e corect.
+Pentru numerale decorative mari (01/02/03) pe fundal deschis folosește **`--color-brand-hover`** (Fern `#3a7d44`) — **4,74:1** pe bg-alt. Zomp ar da 2,90:1, sub pragul de 3:1 pentru text mare. Pe fundal ink, accent-light e corect.
 
 **Contrast minim, verificat înainte de livrare:** 4,5:1 text normal · 3:1 text mare (≥24px, sau ≥19px bold) și componente.
 
