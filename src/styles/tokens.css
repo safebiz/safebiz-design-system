@@ -47,6 +47,17 @@
   --action-primary-hover: var(--color-brand-hover);
   --action-on-dark: #ffffff;
 
+  /* ---- D8: text pe fundal colorat --------------------------------------
+     Zomp și Success sunt destul de deschise încât ALBUL să cadă sub prag:
+       alb pe Zomp    #14a68b →  3,06:1  ❌ (minim 4,5:1 text normal)
+       alb pe Success #69b578 →  2,42:1  ❌
+       ink  pe Zomp             →  5,27:1  ✅
+       ink  pe Success          →  6,66:1  ✅
+     Deci: pe fill Zomp/Success textul și glifele sunt INK, nu albe.
+     Paleta rămâne LOCKED — se schimbă doar culoarea textului de deasupra. */
+  --text-on-brand: var(--color-ink);
+  --text-on-success: var(--color-ink);
+
   /* ---- Gradiente ------------------------------------------------------- */
   /* --gradient-hero: SINGURUL gradient de fundal. Doar pe banda de hero.
      --gradient-brand: derivat din scutul logo-ului, doar decorativ, rar. */

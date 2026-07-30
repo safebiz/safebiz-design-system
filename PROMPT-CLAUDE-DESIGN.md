@@ -118,6 +118,19 @@ Alb pe fundal închis = **`var(--color-text-on-dark)`**, nu `#fff`. Singura exce
 
 Pentru numerale decorative mari (01/02/03) pe fundal deschis folosește **`--color-brand-hover`** (Fern `#3a7d44`) — **4,74:1** pe bg-alt. Zomp ar da 2,90:1, sub pragul de 3:1 pentru text mare. Pe fundal ink, accent-light e corect.
 
+### 🔴 Avertisment 6 — pe fill Zomp și Success, textul e INK, nu alb
+
+Zomp și Success sunt destul de deschise încât albul să cadă sub prag:
+
+| | alb | ink |
+|---|---|---|
+| pe `--color-brand` `#14a68b` | 3,06:1 ❌ | **5,27:1 ✅** |
+| pe `--color-success` `#69b578` | 2,42:1 ❌ | **6,66:1 ✅** |
+
+Deci butonul primary, `Badge variant="brand"`, paginarea activă și glifele ✓ din pastilele verzi folosesc **`var(--text-on-brand)`** / **`var(--text-on-success)`** — ambele = ink. Paleta rămâne LOCKED; se schimbă doar culoarea de deasupra.
+
+Albul rămâne corect pe **ink** (`--color-text-on-dark`) și pe hover-ul Fern al butonului primary (5,04:1).
+
 **Contrast minim, verificat înainte de livrare:** 4,5:1 text normal · 3:1 text mare (≥24px, sau ≥19px bold) și componente.
 
 ---
