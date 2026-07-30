@@ -131,6 +131,20 @@ Deci butonul primary, `Badge variant="brand"`, paginarea activă și glifele ✓
 
 Albul rămâne corect pe **ink** (`--color-text-on-dark`) și pe hover-ul Fern al butonului primary (5,04:1).
 
+### 🔴 Avertisment 7 — Zomp nu e culoare de TEXT pe fundal deschis
+
+Aceeași cifră, arie mult mai mare: `#14a68b` pe alb = **3,06:1**, pe bg-alt = 2,90:1.
+
+| rol | culoare |
+|---|---|
+| **text** pe fundal deschis — linkuri, eyebrow, eticheta `secondary`, `Badge outline`, bife în liste | **`var(--text-link)`** = Fern, **5,00:1** ✅ |
+| **fill**, contur, iconițe, stele decorative (prag 3:1) | `--color-brand` (Zomp) rămâne ✅ |
+| text pe **ink** | alb sau accent-light — Zomp trece tehnic (5,27:1) dar nu-l folosi |
+
+Deci butonul `secondary` are **contur Zomp cu etichetă Fern**, iar `Badge outline` la fel: inelul rămâne brand, textul devine lizibil.
+
+**Hover-ul depinde de fundal, nu de variantă:** pe fundal deschis → **Fern**; pe bandă închisă → **accent-light**. Fern pe ink e aproape invizibil — se pierde în gradient. Un buton primary așezat pe hero-ul închis primește hover accent-light, nu Fern.
+
 **Contrast minim, verificat înainte de livrare:** 4,5:1 text normal · 3:1 text mare (≥24px, sau ≥19px bold) și componente.
 
 ---

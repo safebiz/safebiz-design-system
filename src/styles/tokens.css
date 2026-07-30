@@ -32,8 +32,12 @@
   --text-body: var(--color-text);
   --text-muted: var(--color-text-muted);
   --text-on-dark: var(--color-text-on-dark);
-  --text-link: var(--color-brand);
-  --text-link-hover: var(--color-brand-hover);
+  /* D9 — Zomp NU e culoare de text pe fundal deschis: #14a68b pe alb dă 3,06:1,
+     sub pragul de 4,5:1. Fern dă 5,00:1 pe alb și 4,74:1 pe bg-alt.
+     Zomp rămâne pentru FILL-uri, contururi, iconițe și glife decorative
+     (prag 3:1, pe care îl trece), și rămâne corect ca text pe ink (5,27:1). */
+  --text-link: var(--color-brand-hover);
+  --text-link-hover: var(--color-ink);
 
   --surface-page: var(--color-bg);
   --surface-alt: var(--color-bg-alt);

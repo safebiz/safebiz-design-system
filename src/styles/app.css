@@ -28,7 +28,7 @@ h2 { font-size: var(--fs-h2); font-weight: var(--fw-bold); }
 h3 { font-size: var(--fs-h3); font-weight: var(--fw-semibold); }
 
 p { margin: 0 0 var(--space-4); }
-a { color: var(--color-brand); text-decoration: none; transition: color var(--transition); }
+a { color: var(--text-link); text-decoration: none; transition: color var(--transition); }
 a:hover { color: var(--color-brand-hover); }
 
 .container { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--space-6); }
@@ -46,7 +46,7 @@ a:hover { color: var(--color-brand-hover); }
    Paleta rămâne neatinsă, Zomp rămâne culoarea CTA-ului. */
 .btn--primary { background: var(--color-brand); color: var(--text-on-brand); }
 .btn--primary:hover { background: var(--color-brand-hover); color: var(--color-text-on-dark); }
-.btn--secondary { background: transparent; color: var(--color-brand); border-color: var(--color-brand); }
+.btn--secondary { background: transparent; color: var(--text-link); border-color: var(--color-brand); }
 .btn--secondary:hover { background: var(--color-brand); color: var(--text-on-brand); }
 .btn--on-dark { background: var(--color-text-on-dark); color: var(--color-ink); }
 .btn--on-dark:hover { background: var(--color-accent-light); }
@@ -62,12 +62,12 @@ a:hover { color: var(--color-brand-hover); }
 .badge--brand   { background: var(--color-brand); color: var(--text-on-brand); }
 .badge--success { background: var(--color-success); color: var(--text-on-success); }
 .badge--ink     { background: var(--color-ink); color: var(--color-text-on-dark); }
-.badge--outline { background: transparent; color: var(--color-brand); box-shadow: inset 0 0 0 1.5px var(--color-brand); }
+.badge--outline { background: transparent; color: var(--text-link); box-shadow: inset 0 0 0 1.5px var(--color-brand); }
 
 /* ---- Section heading --------------------------------------------------- */
 .section-heading { text-align: center; max-width: 640px; margin: 0 auto var(--space-12); }
 .section-heading .eyebrow {
-  display: inline-block; font-weight: var(--fw-semibold); color: var(--color-brand);
+  display: inline-block; font-weight: var(--fw-semibold); color: var(--text-link);
   text-transform: uppercase; letter-spacing: 0.08em; font-size: var(--fs-small);
   margin-bottom: var(--space-3);
 }
@@ -112,7 +112,7 @@ a:hover { color: var(--color-brand-hover); }
 .header__logo { height: 42px; }
 .header__nav { display: flex; gap: var(--space-6); align-items: center; }
 .header__nav a { color: var(--color-ink); font-weight: var(--fw-semibold); }
-.header__nav a:hover { color: var(--color-brand); }
+.header__nav a:hover { color: var(--text-link); }
 @media (max-width: 720px) { .header__nav { display: none; } }
 
 /* ---- Footer ------------------------------------------------------------ */
@@ -160,7 +160,7 @@ a:hover { color: var(--color-brand-hover); }
 .plan__unit { color: var(--color-text-muted); font-size: var(--fs-small); margin-left: var(--space-2); }
 .plan__features { list-style: none; padding: 0; margin: 0 0 var(--space-6); display: flex; flex-direction: column; gap: var(--space-3); flex: 1; }
 .plan__features li { position: relative; padding-left: 1.6rem; color: var(--color-text); }
-.plan__features li::before { content: '✓'; position: absolute; left: 0; color: var(--color-brand); font-weight: var(--fw-bold); }
+.plan__features li::before { content: '✓'; position: absolute; left: 0; color: var(--text-link); font-weight: var(--fw-bold); }
 .pricing__note { text-align: center; color: var(--color-text-muted); font-size: var(--fs-small); margin-top: var(--space-8); }
 
 /* ---- Audit landing ---------------------------------------------------- */
@@ -204,7 +204,7 @@ a:hover { color: var(--color-brand-hover); }
 .email__body p { color: var(--color-text); }
 .email__bullets { list-style: none; padding: 0; margin: var(--space-4) 0; display: flex; flex-direction: column; gap: var(--space-3); }
 .email__bullets li { display: flex; gap: var(--space-3); }
-.email__bullets li span { color: var(--color-brand); font-weight: var(--fw-bold); }
+.email__bullets li span { color: var(--text-link); font-weight: var(--fw-bold); }
 .email__cta-wrap { text-align: center; margin: var(--space-8) 0; }
 .email__sig { font-weight: var(--fw-semibold); color: var(--color-ink); }
 .email__footer { background: var(--color-ink); color: rgba(255,255,255,0.75); padding: var(--space-6); text-align: center; font-size: var(--fs-small); }
