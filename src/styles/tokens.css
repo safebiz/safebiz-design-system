@@ -1,6 +1,13 @@
 /* =========================================================================
    Safebiz Solutions — Design Tokens (SINGLE SOURCE OF TRUTH)
    Culorile sunt LOCKED (nu modifica hex-ul). Fonturile sunt NOI (Sora + Inter).
+
+   ⚠️ Acest fișier trebuie să fie SUPRASETUL a tot ce folosesc componentele și
+   template-urile. Claude Design regenerează tokens/*.css DIN el la fiecare
+   rebuild — un token folosit în design dar absent aici dispare tăcut, iar o
+   variabilă CSS nedefinită invalidează TOATĂ declarația (fundal de hero
+   pierdut, eyebrow la mărimea body-ului). Adaugi un token în design ⇒ îl
+   adaugi și aici, în același commit.
    ========================================================================= */
 
 :root {
@@ -18,6 +25,44 @@
   --color-bg: #ffffff;
   --color-bg-alt: #f7f9fa;         /* secțiuni alternate */
   --color-border: #e1e5e9;
+  --border-strong: #c9d0d6;        /* bordură pe fundal alt / separatoare accentuate */
+
+  /* ---- Alias-uri semantice --------------------------------------------- */
+  --text-heading: var(--color-ink);
+  --text-body: var(--color-text);
+  --text-muted: var(--color-text-muted);
+  --text-on-dark: var(--color-text-on-dark);
+  --text-link: var(--color-brand);
+  --text-link-hover: var(--color-brand-hover);
+
+  --surface-page: var(--color-bg);
+  --surface-alt: var(--color-bg-alt);
+  --surface-card: var(--color-bg);
+  --surface-ink: var(--color-ink);
+  --surface-highlight: var(--color-accent-light);
+
+  --border-default: var(--color-border);
+
+  --action-primary: var(--color-brand);
+  --action-primary-hover: var(--color-brand-hover);
+  --action-on-dark: #ffffff;
+
+  /* ---- D8: text pe fundal colorat --------------------------------------
+     Zomp și Success sunt destul de deschise încât ALBUL să cadă sub prag:
+       alb pe Zomp    #14a68b →  3,06:1  ❌ (minim 4,5:1 text normal)
+       alb pe Success #69b578 →  2,42:1  ❌
+       ink  pe Zomp             →  5,27:1  ✅
+       ink  pe Success          →  6,66:1  ✅
+     Deci: pe fill Zomp/Success textul și glifele sunt INK, nu albe.
+     Paleta rămâne LOCKED — se schimbă doar culoarea textului de deasupra. */
+  --text-on-brand: var(--color-ink);
+  --text-on-success: var(--color-ink);
+
+  /* ---- Gradiente ------------------------------------------------------- */
+  /* --gradient-hero: SINGURUL gradient de fundal. Doar pe banda de hero.
+     --gradient-brand: derivat din scutul logo-ului, doar decorativ, rar. */
+  --gradient-hero: linear-gradient(135deg, #0a2239 0%, #123049 60%, #3a7d44 140%);
+  --gradient-brand: linear-gradient(160deg, #14a68b 0%, #3a7d44 100%);
 
   /* ---- INTERZIS: roșu / portocaliu pentru CTA (nu se aliniază paletei) -- */
 
@@ -26,20 +71,29 @@
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;     /* body + UI */
 
   --fw-regular: 400;
+  --fw-medium: 500;
   --fw-semibold: 600;
   --fw-bold: 700;
+  --fw-extrabold: 800;   /* doar numerale decorative (01/02/03) */
 
-  /* Type scale */
+  /* Type scale — DELIBERAT RARĂ. Nu inventa mărimi între trepte;
+     dacă ai nevoie de altceva, folosește treapta existentă cea mai apropiată.
+     Nimic sub --fs-small. */
   --fs-hero: clamp(2.4rem, 5vw, 3.5rem);   /* H1 hero */
   --fs-h1: clamp(2rem, 4vw, 2.75rem);
   --fs-h2: clamp(1.6rem, 3vw, 2.25rem);
   --fs-h3: 1.4rem;
+  --fs-h4: 1.2rem;                          /* titlu de card / sidebar — aceeași treaptă ca --fs-lead */
   --fs-lead: 1.2rem;                        /* subheadline / intro */
   --fs-body: 1.075rem;                      /* ~17–18px */
-  --fs-small: 0.9rem;
+  --fs-small: 0.9rem;                       /* meta, captions — treapta cea mai mică */
+  --fs-eyebrow: 0.9rem;
 
   --lh-tight: 1.15;    /* titluri */
   --lh-body: 1.6;      /* text lung */
+
+  --ls-heading: -0.01em;   /* Sora, pe titluri */
+  --ls-eyebrow: 0.08em;    /* eyebrow UPPERCASE */
 
   /* ---- Spacing --------------------------------------------------------- */
   --space-1: 0.25rem;
