@@ -149,6 +149,34 @@ Deci butonul `secondary` are **contur Zomp cu etichetă Fern**, iar `Badge outli
 
 ---
 
+## 3b. 🔴 Mobilul e cazul principal, nu excepția
+
+**Date reale, GA4 `safebiz.ro`, 12 luni (30 iul 2025 → 30 iul 2026):**
+
+| Dispozitiv | Sesiuni | % | Engagement rate |
+|---|---:|---:|---:|
+| **mobile** | **1.284** | **67%** | **0,64** |
+| desktop | 612 | 32% | 0,52 |
+| tabletă | 11 | 0,6% | 0,91 |
+
+Mobilul e majoritar în **11 din 12 luni** și are engagement **mai bun** decât desktopul. Deci un ecran care „arată bine pe desktop și se stivuiește acceptabil pe mobil" e proiectat pentru minoritate.
+
+**Fiecare ecran livrează două previzualizări, nu una.** În `data-props`, pe lângă `$preview` de desktop, dă și o previzualizare la **390×844**. Un ecran fără previzualizare mobilă nu e livrat — regulile de breakpoint pot fi corecte în CSS și totuși greșite pe ecran, iar nimeni nu le vede dacă previzualizarea e doar 1280.
+
+**Reguli care nu se negociază pe mobil:**
+
+1. **Zero scroll orizontal.** Nimic nu depășește lățimea ecranului la 360px. Tabelele, blocurile de cod și rândurile late scrolează în containerul lor, nu împing pagina.
+2. **Ținte de atingere ≥ 44×44px** pentru orice element pe care se apasă — inclusiv iconițele de share și de social, care sunt cel mai des sub prag.
+3. **Un singur CTA persistent pe mobil.** Când sidebarul dispare, CTA-ul din el dispare cu tot cu coloană. Desenează explicit **bara CTA lipită jos** care îl înlocuiește: apare după derulare, nu de la început, și lasă loc sub ea ca să nu acopere finalul paginii.
+4. **Ce se pliază, ce se ascunde, ce rămâne.** Pentru fiecare secțiune spune explicit una din trei. „Se stivuiește" nu e o decizie — e ce face browserul dacă nu decizi tu.
+5. **Nu introduce mărimi noi pentru mobil.** Scara din §3 e deja fluidă (`clamp`) și capetele ei de jos SUNT valorile mobile: H1 32px, H2 26px, corp 17px. Verificate pe implementare, se potrivesc exact.
+6. **Ordinea contează mai mult decât pe desktop.** Pe desktop cititorul vede sidebarul din prima; pe mobil vede doar primul ecran. Spune ce intră în primele 844px.
+
+**Ce e deja construit în Kadence și NU trebuie contrazis** (stager, 31 iul):
+sidebarul dispare complet sub 1024px pe articole · bara CTA lipită jos apare după 700px de derulare, doar pe mobil · cuprinsul e pliat implicit pe mobil și deschis pe desktop · iconițele de share au minim 44px. Dacă designul cere altceva, spune-o explicit ca schimbare, nu tăcut.
+
+---
+
 ## 4. Voce & copy — citește `src/data/voice.ts` și `phrases.ts`
 
 > ### ⚠️ Textul de articol este PLACEHOLDER
@@ -292,3 +320,21 @@ Header, footer (batch separat), comentarii, pop-up-uri, pagina de vânzare, Desp
 Cele 3 ecrane se traduc în patterns Kadence: card articol (loop) · cuprins · card autor · articole similare · breadcrumb bar · **CTA compact** · citat evidențiat · notă inline · paginare · newsletter 2 coloane. CTA-ul amplu refolosește patternul Flagship deja construit.
 
 Detaliul de implementare: `projects/plans/Safebiz-Redesign/PLAN-ARHITECTURA-CONTINUT-SAFEBIZ-2026-07-30.md`.
+
+---
+
+## 9. Revizuire mobilă a Batch 1 — sarcină de sine stătătoare
+
+Batch 1 a fost livrat cu previzualizare doar la 1280px. Regulile de breakpoint există în CSS, dar nimeni nu a văzut ecranele randate pe mobil, iar mobilul e 67% din trafic (§3b).
+
+**Asta e o revizuire, nu o regenerare.** Nu redesena desktopul, nu schimba tokeni, nu rescrie copy. Atinge doar ce se rupe sub 768px.
+
+Pentru fiecare din `templates/{articol,categorie,blog}`:
+
+1. Adaugă în `data-props` o a doua previzualizare la **390×844**, pe lângă cea de desktop.
+2. Parcurge lista de reguli din §3b (1–6) și **raportează** ce încalcă fiecare ecran, cu numele secțiunii.
+3. Repară doar încălcările. Fiecare reparație primește un comentariu de o linie care spune ce regulă rezolvă.
+4. Adaugă bara CTA lipită jos, mobil-only, în ecranul **Articol** — nu există în design, dar există deja în implementare (§3b).
+5. La final, spune explicit ce ai lăsat neschimbat și de ce.
+
+Ce **nu** face parte din revizuire: header, footer, meniul de navigație (batch separat).
