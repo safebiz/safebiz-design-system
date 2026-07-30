@@ -22,6 +22,8 @@ Citește din repo, nu din memorie:
 | `src/components/*.tsx` | 14 componente reale |
 | `public/logo/*` | 9 variante de logo + favicon |
 
+🔴 **`tokens.css` din repo e lista COMPLETĂ de tokeni. Nu folosi niciunul care nu e acolo.** O variabilă CSS nedefinită invalidează **toată** declarația, tăcut — și fiindcă la rebuild tokenii se regenerează din repo, un token inventat în design dispare la următoarea generare, luând cu el fundalul sau mărimea care depindea de el. Dacă îți lipsește ceva, **spune-o explicit în livrare** ca să fie adăugat întâi în repo; nu-l folosi direct.
+
 ---
 
 ## 1. LOCKED — nu modifica
@@ -65,7 +67,9 @@ Pentru Batch 2 există deja `PricingPlans` (Start/Pro/VIP cu `plan--highlight` +
 
 ## 3. Fundații — și trei avertismente
 
-**Tipografie fluidă**, nu px fixe: `--fs-hero` clamp 38→56px · `--fs-h1` 32→44 · `--fs-h2` 26→36 · `--fs-h3` 22 · `--fs-lead` 19 · `--fs-body` 17 · `--fs-small`/`--fs-eyebrow` 14. Sora `--lh-tight` 1.15 / `--ls-heading` −0.01em; Inter `--lh-body` 1.6.
+**Tipografie fluidă**, nu px fixe: `--fs-hero` clamp 38→56px · `--fs-h1` 32→44 · `--fs-h2` 26→36 · `--fs-h3` 22 · **`--fs-h4` 19 (titlu de card / sidebar)** · `--fs-lead` 19 · `--fs-body` 17 · `--fs-small`/`--fs-eyebrow` 14. Sora `--lh-tight` 1.15 / `--ls-heading` −0.01em; Inter `--lh-body` 1.6. Greutăți: `--fw-regular/medium/semibold/bold` + `--fw-extrabold` **doar** pentru numerale decorative.
+
+**Scara e deliberat rară și e completă** — `--fs-h4` a fost adăugat exact ca să nu mai fie nevoie de mărimi intermediare. Nu există nimic sub `--fs-small`.
 
 **Eyebrow:** UPPERCASE, `--ls-eyebrow` 0.08em, semibold — **Zomp pe fundal deschis, accent-light pe fundal închis**.
 
@@ -93,9 +97,35 @@ Paleta are `success` (`#69b578`), dar **nicio** culoare de warning/error, și ro
 
 `Button.jsx` definește `on-dark` ca **fill alb, text ink → accent-light la hover**. Cardul de specimen `components/core/core.card.html` îl randează **invers** (ink cu text alb), printr-un override inline pus ca butonul să fie vizibil pe fundalul deschis al cardului. **Componenta e sursa, nu cardul.** Când regenerezi cardul, pune butonul pe un swatch închis, fără override inline.
 
+### 🔴 Avertisment 4 — zero valori brute, fără excepție
+
+Fiecare mărime de font, spațiere, rază, culoare și greutate vine dintr-un **token**. Interzis: `font-size:1.1rem`, `padding:0.7rem 1rem`, `font-size:2.6rem`, `color:#fff`, `border-radius:12px`.
+
+Motivul e mecanic, nu estetic: designul devine blocuri Kadence native, iar fiecare valoare în afara tokenilor se transformă într-o **setare de tipografie per bloc**, făcută de mână, care apoi trebuie întreținută separat pe zeci de blocuri (§6.9). La generarea anterioară a Batch 1 au apărut ~15 titluri de card la `1.1rem` brut — de aceea există acum `--fs-h4`.
+
+Alb pe fundal închis = **`var(--color-text-on-dark)`**, nu `#fff`. Singura excepție permisă: `rgba(255,255,255,α)` pentru text cu opacitate (paragraf 85%, notă 65%) și overlay-uri în degradeu — tokenii de paletă pierd canalul alpha.
+
+### 🔴 Avertisment 5 — `accent-light` NU e culoare de text pe fundal deschis
+
+`--color-accent-light` (`#d0db97`) pe `--color-bg-alt` dă un contrast de **1,37:1** — practic invizibil. E o culoare de **fundal** și de eyebrow **pe ink**, nimic altceva.
+
+Pentru numerale decorative mari (01/02/03) pe fundal deschis folosește **`--color-brand`**. Pe fundal ink, accent-light e corect.
+
+**Contrast minim, verificat înainte de livrare:** 4,5:1 text normal · 3:1 text mare (≥24px, sau ≥19px bold) și componente.
+
 ---
 
 ## 4. Voce & copy — citește `src/data/voice.ts` și `phrases.ts`
+
+> ### ⚠️ Textul de articol este PLACEHOLDER
+>
+> Conținutul editorial real (corp de articol, titluri de articole, statistici, studii de caz) e produs separat de echipa de copywriting. **Nu e livrabilul tău și nu va fi publicat ca atare.**
+>
+> Ce contează la text pentru tine e **forma**, nu afirmația: lungimi realiste de paragraf, titluri de 1–2 rânduri, excerpturi de 2–3 rânduri, etichete de buton de 2–4 cuvinte. Un design testat pe „Lorem ipsum" cade la text real — de asta scriem propoziții plauzibile în română, cu diacritice.
+>
+> Nu te opri să verifici dacă o cifră e adevărată. **Scrie cifre plauzibile ca să vezi cum arată rândul.**
+>
+> **Excepția — chrome-ul de UI e livrabil de design**, nu placeholder: etichete de buton, titluri de secțiune, eyebrow-uri, texte de formular și de consimțământ, stări goale, navigație. Astea rămân în design și se traduc direct în Kadence — pentru ele regulile de mai jos se aplică integral, în special lista de fraze interzise.
 
 **Persoana are DOUĂ jumătăți, ambele obligatorii:**
 
@@ -126,11 +156,10 @@ Minim **2 CTA-uri intercalate**, niciodată doar la final:
 
 🔴 **Exact UN CTA per poziție.** Un articol poate avea mai multe etichete, dar doar una e *principală* și ea alege oferta. Nu desena sloturi de CTA stivuite.
 
-### Ce NU inventăm
+### Ce NU generăm deloc
 
-- **Testimoniale, recenzii, cifre de clienți.** `content.ts` → `testimonials` e PLACEHOLDER marcat.
-- **Claim-uri juridice** pentru serviciile `blocked` (OUG 18/2026 retragere, HoReCa 948/2026) — copy generic-safe, fără publicare, până la sign-off de avocat.
-- **JSON-LD / schema markup.** Nu genera structured data. Se produce determinist prin SureRank și se validează cu Rich Results Test. Markup-ul plauzibil-dar-eronat eșuează tăcut.
+- **JSON-LD / schema markup.** Nu produce structured data, în niciun ecran. Se generează determinist prin SureRank și se validează cu Rich Results Test. Markup-ul plauzibil-dar-eronat eșuează tăcut, iar din mockup ar ajunge copiat în producție.
+- **Nume și fotografii de persoane reale** în testimoniale — inițiale sau „Client, domeniul X". Restul textului de umplere e liber (vezi caseta de la începutul secțiunii).
 
 ---
 
@@ -152,9 +181,9 @@ Conținut realist: titlu **„Consimțământ GDPR: ce trebuie să știi despre 
 | 2 | Cap de articol | `Badge` categorie · H1 (`--fs-h1`) · rând meta: dată · autor cu avatar · „6 min de citit" |
 | 3 | Imagine featured | 16:9, radius `lg`, shadow-sm |
 | 4 | Cuprins | card bg-alt, border 1px, radius `lg` — titlu + 4 ancore. Colapsabil pe mobil |
-| 5 | Intro | primul paragraf la `--fs-lead` |
-| 6 | **🎯 SLOT CTA #1 — compact, soft/educațional** | **singura componentă nouă.** Orizontal, joasă: bg accent-light, radius `lg`, fără border/shadow. Stânga: chip Lucide 56px (radius `md`, bg alb) + titlu o linie + subtitlu o linie. Dreapta: buton **primary**. Se stivuiește pe mobil |
-| 7 | Corp articol | H2 + paragrafe + listă cu bifă `success` + citat: bordură stânga 4px Zomp, bg bg-alt, italic |
+| 5 | Intro + prima secțiune | primul paragraf la `--fs-lead`, apoi primul H2 + 2 paragrafe |
+| 6 | **🎯 SLOT CTA #1 — compact, soft/educațional** | **singura componentă nouă.** Orizontal, joasă: bg accent-light, radius `lg`, fără border/shadow. Stânga: chip Lucide 56px (radius `md`, bg `--color-bg`) + titlu o linie + subtitlu o linie. Dreapta: buton **primary**. Se stivuiește pe mobil.<br>🔴 **Poziția: după prima secțiune H2, la ~30–40% din articol** — nu imediat sub intro. `voice.ts` → `ctaStructure` cere 30–40%; în Kadence asta e hook-ul `after_p3`, nu `after_p1` |
+| 7 | Corp, continuare | încă 2 H2 + paragrafe + listă cu bifă `success` + citat: bordură stânga 4px Zomp, bg bg-alt, italic |
 | 8 | Notă inline | bordură stânga 4px **ink** + bg bg-alt + iconiță Lucide ink. **Fără roșu/portocaliu** (§3, avertisment 2) |
 | 9 | Etichete | `Badge` variantă `outline`, discrete |
 | 10 | Bară de share | „Distribuie:" + 4 iconițe Lucide circulare cu contur |
@@ -192,10 +221,10 @@ Fără sidebar — grila are nevoie de toată lățimea.
 | 1 | Hero blog | mai deschis decât cel de categorie: bg-alt (nu gradient), H1 „Blog", subtitlu fs-lead, **câmp de căutare** lat radius `pill` cu iconiță Lucide |
 | 2 | Bandă categorii | 8–10 `Badge` cu numărul de articole. Cele goale nu apar |
 | 3 | Featured mare | cel mai recent articol: imagine 21:9 cu overlay ink în degradeu jos, text peste imagine (`Badge` + H2 alb + meta) |
-| 4 | „Cele mai citite" | 3 carduri orizontale numerotate 01/02/03 — număr mare accent-light stânga, titlu + meta dreapta |
-| 5 | Grilă „Toate articolele" | același card ca ecran 2 |
+| 4 | „Cele mai citite" | 3 carduri orizontale numerotate 01/02/03 — număr mare `--fs-h1` / `--fw-extrabold` **în `--color-brand`** (NU accent-light, §3 avertisment 5) stânga, titlu + meta dreapta |
+| 5 | Grilă „Toate articolele" | același card ca ecran 2 — **primul rând, 3 carduri** |
 | 6 | **🎯 CTA generic** | Flagship — „Nu știi de unde să începi?" |
-| 7 | Grilă, continuare | încă un rând |
+| 7 | Grilă, continuare | **obligatoriu: încă un rând de 3 carduri, DUPĂ CTA.** CTA-ul trebuie să fie intercalat în grilă, nu lipit la coada paginii. Fără acest rând, Flagship + newsletter + „Încarcă mai multe" se stivuiesc toate trei la final |
 | 8 | Newsletter | idem |
 | 9 | „Încarcă mai multe" | buton **secondary**, centrat, lat |
 
@@ -210,8 +239,8 @@ Designul devine blocuri Kadence native pe staging. Astea nu sunt preferințe —
 3. **Fiecare CTA e bloc autonom** — nu depinde de ce e deasupra sau dedesubt. Va fi injectat ca Kadence Element, în 12 variante de copy, în poziții diferite.
 4. **Cardul de articol** trebuie să funcționeze la 1 / 2 / 3 coloane cu **același** markup.
 5. **Radiusuri doar din set:** 8 / 14 / 22 / 999.
-6. **Culori doar tokeni.** Excepție documentată: umbrele cer hex + `opacity`, fiindcă tokenii de paletă pierd alpha în Kadence.
-7. **Contrast minim** 4.5:1 text normal, 3:1 componente. Pe ink: alb sau accent-light — **niciodată Zomp**.
+6. **Culori doar tokeni** — inclusiv albul, care e `--color-text-on-dark`. Excepție documentată: umbrele și overlay-urile cer `rgba()` cu alpha, fiindcă tokenii de paletă pierd canalul alpha în Kadence.
+7. **Contrast minim** 4.5:1 text normal, 3:1 text mare și componente. Pe ink: alb sau accent-light — **niciodată Zomp**. Pe fundal deschis: **niciodată accent-light** (§3, avertisment 5).
 8. **Butoane: doar cele 3 variante.** Fără a patra.
 9. **Nu cere variații micro-tipografice pe elemente individuale** dacă tema le poate da global — în Kadence, un sub-obiect de atribut parțial sparge editorul; obiectul trebuie complet sau absent.
 10. **Sidebar-ul nu e per-device în Kadence** — layoutul hibrid se face cu Element desktop-only + CSS care ascunde toată coloana. Desenează ambele stări explicit.
