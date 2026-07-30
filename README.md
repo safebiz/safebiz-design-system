@@ -5,6 +5,7 @@ Sistem de design (tokeni + componente React) pentru **Safebiz Solutions**, compa
 ## Cum e folosit de Claude Design
 
 Repo-ul e gândit ca „frontend-focused subfolder": tokeni + componente React care predau brand-ul. Claude Design citește:
+- **`PROMPT-CLAUDE-DESIGN.md`** — **specificația de generare**: ce se desenează, ce se refolosește, ce e interzis. Punctul de intrare.
 - `src/styles/tokens.css` — sursa unică de adevăr pentru culori, fonturi, spacing, radii
 - `src/components/*` — componentele reale
 - `src/data/content.ts` — conținut REAL Safebiz (fără lorem ipsum), inclusiv catalogul complet de servicii
