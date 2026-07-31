@@ -244,3 +244,60 @@ export const footerLinks = {
     { label: 'Contact', href: '/contact' },
   ],
 }
+
+/* -------------------------------------------------------------------------
+   Contact — date REALE, citite din configurația live a temei (stager.safebiz.ro,
+   2026-07-31): header contact items + pagina /contact/. Nu le schimba din design.
+   ------------------------------------------------------------------------- */
+
+export const contact = {
+  phone: '+40 721 737 597',
+  phoneHref: 'tel:+40721737597',
+  email: 'office@safebiz.ro',
+  addressShort: 'Sfântu Gheorghe, jud. Covasna',
+  addressFull: 'Sfântu Gheorghe, Str. Presei nr. 4 / 31, jud. Covasna',
+  mapsHref:
+    'https://www.google.com/maps/place/SafeBiz+Solutions/@45.8625346,25.7813469,19.43z',
+  hours: 'Luni–vineri, 10:00–17:00',
+  social: [
+    { label: 'Facebook', href: 'https://www.facebook.com/SafeBiz.ro' },
+    { label: 'WhatsApp', href: 'https://wa.me/40721737597' },
+    { label: 'Google Reviews', href: 'https://g.page/r/CaxiAISOVMkNEBM/review' },
+  ],
+}
+
+/* -------------------------------------------------------------------------
+   Navigație — arhitectura propusă pentru Batch 4 (header/footer/meniuri).
+   Reduce meniul actual de 19 iteme pe 3 niveluri la 5 intrări de nivel 1.
+   `megaFrom: 'serviceGroups'` = panoul se construiește din cele 6 categorii de
+   servicii de mai sus; serviciile cu status 'blocked' NU apar în meniu.
+   `pending: true` = pagina nu există încă pe site (se creează în F7/F8).
+   ------------------------------------------------------------------------- */
+
+export const nav = {
+  topBar: {
+    left: ['phone', 'email'],
+    right: ['social', 'languageSwitcher'],
+  },
+  primary: [
+    { label: 'Servicii', href: '/servicii', megaFrom: 'serviceGroups', pending: true },
+    { label: 'Prețuri', href: '/preturi', pending: true },
+    { label: 'Blog', href: '/blog', dropdownFrom: 'categories' },
+    { label: 'Despre noi', href: '/despre-noi', pending: true },
+    { label: 'Contact', href: '/contact' },
+  ],
+  primaryCta: { label: 'Cerere ofertă', href: '/cerere-oferta' },
+  // Categoriile de blog cu articole publicate (RO), 2026-07-31. Cele goale nu apar.
+  blogCategories: [
+    { label: 'GDPR', href: '/blog/categorie/gdpr/' },
+    { label: 'Optimizare SEO', href: '/blog/categorie/optimizare-seo/' },
+    { label: 'WordPress', href: '/blog/categorie/wordpress/' },
+    { label: 'Web Design', href: '/blog/categorie/web-design/' },
+    { label: 'Google My Business', href: '/blog/categorie/google-my-business/' },
+    { label: 'Administrare afaceri', href: '/blog/categorie/administrare-afaceri/' },
+  ],
+  languages: [
+    { code: 'ro', label: 'RO', current: true },
+    { code: 'hu', label: 'HU', current: false },
+  ],
+}

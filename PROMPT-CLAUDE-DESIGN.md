@@ -484,3 +484,102 @@ Două ecrane mici într-un fișier, separate clar.
 2. Batch 3 după ce Batch 2 e acceptat.
 3. La finalul fiecărui batch raportează: **ce componente noi ai creat** (cu motivul), **ce ai refolosit**, **ce ai extins**, și **ce nu ai putut face din tokenii existenți** — ultima categorie e cea mai utilă, fiindcă arată unde sistemul e prea sărac.
 4. Nu adăuga tokeni. Scala de spațiere are 9 pași deliberat (§3, avertisment 1). Dacă ai nevoie de un pas care nu există, spune-o în raport în loc să-l inventezi.
+
+---
+
+## 13. Batch 4 — Header, Footer, Meniuri
+
+Două ecrane: **`Safebiz Header.html`** · **`Safebiz Footer.html`**.
+
+**De ce acum:** Batch 1 și 2 au folosit header/footer existente ca placeholder (§7). Sunt singurele componente prezente pe **toate** paginile — deci și singurele care, greșite, se văd pe fiecare pagină, în ambele limbi.
+
+**Regula de mobil din §3b rămâne condiție de livrare: două previzualizări din prima, 1280 și 390×844.** Aici mobilul nu e un breakpoint, e un ecran de sine stătător: meniul mobil e o pagină întreagă, nu un meniu de desktop strâns.
+
+### 13.0 Starea reală, măsurată pe `stager.safebiz.ro` (2026-07-31)
+
+Nu desena „ce ar trebui să fie" fără să știi ce este. Astea sunt citite din configurația live a temei și din HTML-ul randat, nu din documentație:
+
+| Ce | Starea de acum |
+|---|---|
+| Rândul de sus (desktop) | stânga: telefon · email · adresă (iconițe). Dreapta: 3 social + meniul „Top Bar Menu" |
+| „Top Bar Menu" | **0 iteme proprii** — ce se vede acolo e **comutatorul de limbă WPML**, injectat în slotul acelui meniu |
+| Rândul principal | logo stânga · navigație centru · buton „Cerere ofertă" + căutare dreapta. **Sticky cu shrink** pe rândul principal |
+| Meniul principal | **19 iteme pe 3 niveluri** (Servicii › Creare site › Site de prezentare SEO) |
+| 🔴 4 iteme nu duc nicăieri | „Servicii", „GDPR", „SEO", „Despre noi" sunt **ancore `#…` pe pagina de start**, nu pagini |
+| Mobil | logo + buton hamburger → popup cu: meniu mobil, buton, social |
+| 🔴 Meniul mobil | e un **al doilea meniu**, „Mobile Ro", cu 18 iteme întreținute separat de cel de desktop |
+| Footer | 6 zone de widgeturi cu blocuri `core/*` (nu DS), meniu „Footer menu" (5) + „Legal" (5) |
+| 🔴 Linkuri moarte în footer | **3 din 5** iteme din „Footer menu" trimit la pagina de start („Creare magazin online", „Optimizare SEO", „GDPR Online & Offline") |
+| 🔴 Logo vechi în footer | imagine din 2020, cu textul alternativ **„SafeBiz solutions Logo"** — casing greșit (§1) |
+| HU | toate meniurile au traducere WPML (`PrimaryMenu HU` etc.) ⇒ orice structură nouă se traduce, nu se duplică |
+| Mega menu | Kadence Pro îl are, dar **nu e folosit pe niciun item** |
+
+### 13.1 Date noi în repo — folosește-le, nu inventa
+
+`src/data/content.ts` a primit două exporturi noi, exact pentru acest batch:
+
+- **`contact`** — telefon `+40 721 737 597`, `office@safebiz.ro`, adresă completă, link Maps, program `Luni–vineri, 10:00–17:00`, 3 rețele (Facebook, WhatsApp, Google Reviews). **Sunt date reale, citite din configurația live.** Nu le rescrie, nu adăuga rețele pe care nu le avem.
+- **`nav`** — arhitectura propusă: 5 intrări de nivel 1 în loc de 19 iteme plate, plus categoriile de blog nevide și cele două limbi.
+
+`nav.primary` conține câmpul `pending: true` pe „Servicii", „Prețuri" și „Despre noi" — **paginile acelea nu există încă**. Desenează-le ca linkuri normale, dar nu inventa conținut de destinație pentru ele.
+
+Serviciile cu `status: 'blocked'` (OUG 18/2026, HoReCa 948/2026) **nu apar în meniu.**
+
+### 13.2 Ce trebuie să încapă în Kadence — constrângeri verificate în cod, nu preferințe
+
+1. **Headerul e construit din rânduri cu sloturi fixe** (sus / principal / jos, fiecare cu 5 poziții: stânga, stânga-centru, centru, dreapta-centru, dreapta). Designul trebuie să se exprime prin *ce pui în sloturi*, nu printr-un layout liber. Dacă ai nevoie de altceva, spune-o explicit — alternativa e un header complet custom, care ne costă toate setările native.
+2. **Mega menu = setare per item de meniu**, cu lățime (conținut / lat / custom), număr de coloane (implicit 3) și layout. **Coloanele se construiesc din subitemele meniului** — deci un panou cu 6 coloane de servicii e realizabil doar dacă structura de meniu chiar are 6 subiteme.
+3. **Un item de meniu poate fi înlocuit integral cu un Kadence Element** (randat prin `[kadence_element id="…"]`). Ăsta e mecanismul prin care un panou cu carduri, iconițe și CTA devine posibil. **Consecință de design: panoul de mega menu trebuie să fie un bloc autonom**, care arată corect și scos din meniu — exact ca CTA-urile din §6.3.
+4. **Meniul mobil e un meniu separat în WordPress.** Desenează-l ca atare și spune explicit dacă structura ta cere ca mobilul și desktopul să aibă **același** conținut (recomandat — altfel se întreține de două ori, în două limbi).
+5. **Comutatorul de limbă nu e o componentă a temei** — e injectat de WPML într-un slot de meniu. Poate arăta ca text (`RO` / `HU`), ca steag, sau ambele. Desenează varianta **text**, cu limba curentă evidențiată; steagurile sunt o alegere proastă pentru limbi (steagul e țară, nu limbă).
+6. **Header condiționat** există (modul Kadence Pro) ⇒ headerul redus pentru pagina „Mulțumim" (§10, ecran 7) e realizabil fără cod.
+7. **Footerul e format din zone de widgeturi**, nu dintr-un layout liber: 3 coloane sus, 1 zonă mijloc, 2 zone jos. Coloanele tale trebuie să încapă în asta.
+
+### 13.3 🔴 O contradicție de rezolvat înainte să desenezi
+
+§6.7 spune: *„Pe ink: alb sau accent-light — niciodată Zomp."* Dar Zomp pe ink măsoară **5,27:1**, adică trece pragul de 4,5:1, iar footerul actual din DS chiar folosește Zomp ca hover de link.
+
+**Regula corectă, mai precisă:** pe ink, Zomp e permis **doar ca stare de hover pentru linkuri**. Niciodată pentru text de corp, titluri sau fundal de buton pe ink — acolo rămân alb și accent-light. Aplic-o și spune în raport dacă ai folosit-o altfel.
+
+### Ecran 12 — `Safebiz Header.html`
+
+Un fișier, **7 stări separate vizual, etichetate**. Nu 7 fișiere.
+
+| # | Stare | Detalii |
+|---|---|---|
+| 1 | **Desktop, repaus** | Rând sus: telefon + email stânga (iconițe Lucide 16px, text `--fs-small` muted), dreapta social + comutator `RO / HU`. Fundal `--color-bg-alt`, hairline jos. Rând principal: logo `logo-horizontal-color.png` (înălțime 42–48px), 5 linkuri de nivel 1, căutare (iconiță), buton **primary** „Cerere ofertă" |
+| 2 | **Desktop, sticky** | Ce se schimbă la derulare: rândul de sus dispare, rândul principal se strânge, apare o umbră `--shadow-sm`. Desenează starea, nu animația — mișcarea rămâne `--transition` |
+| 3 | **Mega menu „Servicii" deschis** | Panoul: **6 coloane = cele 6 categorii** din `serviceGroups`, fiecare cu titlu de categorie (`--fs-h4`, Sora) + serviciile ei ca linkuri cu iconiță Lucide 20px. Sub grilă, o bandă cu CTA-ul flagship **All-In-One** pe `--color-bg-alt`. Lățime = lățimea conținutului (1160px), nu tot ecranul. Serviciile `blocked` lipsesc.<br>🔴 6 coloane la 1160px = ~180px/coloană. Dacă titlurile se rup urât, **spune-o și propune 3×2** în loc să micșorezi tipografia sub scală |
+| 4 | **Dropdown simplu „Blog"** | Cele 6 categorii din `nav.blogCategories` + un rând separat „Toate articolele →". O coloană, card alb, radius `lg`, `--shadow-md`, hairline. Ăsta e stilul implicit pentru orice dropdown care nu e mega |
+| 5 | **Mobil, repaus** | Logo + hamburger. **Ținta de atingere ≥44px** (§3b). Butonul „Cerere ofertă" **nu** intră în bara mobilă — ar concura cu bara CTA lipită jos care există deja în articole |
+| 6 | **Mobil, meniu deschis** | Ecran plin, nu dropdown. De sus în jos: rând cu logo + „×" · cele 5 intrări la `--fs-h4`, cu separatoare hairline · „Servicii" ca **acordeon** care descoperă cele 6 categorii (nu o listă de 22 de servicii — categoriile duc mai departe) · buton primary lat „Cerere ofertă" · telefon și email ca rânduri apăsabile · comutator `RO / HU` · social. Derulabil, cu rândul de sus fix |
+| 7 | **Header redus** | Pentru „Mulțumim" și pagini de conversie: logo + un singur link „← Înapoi la site". Fără meniu, fără CTA |
+
+**Ce NU pui în header:** numărul de telefon ca buton mare, „program de lucru", bară de anunțuri. Rândul de sus are deja 3 informații — a patra le face pe toate invizibile.
+
+### Ecran 13 — `Safebiz Footer.html`
+
+Un fișier, **2 variante + starea mobilă**.
+
+| # | Secțiune | Detalii |
+|---|---|---|
+| 1 | **Bandă newsletter** | Deasupra footerului, pe `--color-bg-alt`: grid 2 coloane — text stânga, câmp email + buton primary dreapta, linie de consimțământ dedesubt. **Aceeași componentă ca în Batch 1**, nu o variantă nouă |
+| 2 | **Corpul footerului** — fundal `--color-ink` | 4 coloane pe desktop: **(a)** logo alb + motto (Sora, accent-light) + tagline 2 rânduri + cele 3 rețele · **(b)** Servicii — cele 6 linkuri din `footerLinks.servicii` · **(c)** Resurse — Blog, Prețuri, Despre noi, Cerere ofertă · **(d)** Contact — telefon, email, adresă, program, „Vezi pe hartă →" |
+| 3 | Titluri de coloană | Sora, `--fs-h4`, alb. Linkuri: alb 80% → **hover Zomp** (§13.3). Spațiere între linkuri `--space-2` |
+| 4 | **Bară de jos** | Hairline `rgba(255,255,255,0.12)` deasupra. Stânga: `© 2018–2026 Safebiz Solutions`. Dreapta: cele 4 linkuri legale + comutatorul `RO / HU`. Pe mobil se stivuiește, legalul rămâne pe un rând derulabil |
+| 5 | **Variantă scurtă** | Pentru „Mulțumim" și landing: doar bara de jos — logo mic, copyright, 4 linkuri legale. Fără coloane, fără newsletter |
+| 6 | **Mobil** | 4 coloane → 1. Coloanele de linkuri devin **acordeoane pliate** (deschise ar da un footer de 3 ecrane); coloana de contact rămâne **desfășurată** — pe telefon, contactul e cel mai des motivul pentru care omul ajunge în footer |
+
+🔴 **Logo:** `logo-horizontal-white.png` pe ink. **Nu** cel din 2020 care e încă pe site, și nicăieri textul „SafeBiz".
+
+### 13.4 Ce NU desenăm în Batch 4
+
+Pop-up-uri și exit-intent (decizie separată), bannerul de cookie-uri (îl randează SureCookie, cu propriul stil), bara CTA lipită jos pe mobil (există deja, §3b), breadcrumb-ul (e în Batch 1), pagina de căutare (Batch 3, ecran 11).
+
+### 13.5 Ce raportezi la final
+
+Pe lângă raportul standard din §12:
+
+1. **Dacă mega menu-ul cu 6 coloane încape** la 1160px fără să cobori sub scala de tipografie — și ce ai făcut dacă nu.
+2. **Ce se pierde** dacă meniul mobil trebuie să fie identic cu cel de desktop.
+3. Dacă ai avut nevoie de o stare pe care sloturile de header din Kadence **nu** o pot exprima (§13.2.1).
