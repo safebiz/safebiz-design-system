@@ -58,7 +58,12 @@
        ink  pe Zomp             →  5,27:1  ✅
        ink  pe Success          →  6,66:1  ✅
      Deci: pe fill Zomp/Success textul și glifele sunt INK, nu albe.
-     Paleta rămâne LOCKED — se schimbă doar culoarea textului de deasupra. */
+     Paleta rămâne LOCKED — se schimbă doar culoarea textului de deasupra.
+
+     EXCEPȚIE, butoanele (vezi .btn din app.css): la --fs-lead + --fw-bold textul
+     intră în categoria WCAG „text mare", unde pragul coboară la 3:1 — iar albul pe
+     Zomp dă 3,06:1, deci trece. De aceea .btn--primary e ALB, iar .badge--brand,
+     care e --fs-small, rămâne pe ink. Diferența e de mărime, nu de gust. */
   --text-on-brand: var(--color-ink);
   --text-on-success: var(--color-ink);
 
@@ -98,6 +103,7 @@
 
   --ls-heading: -0.01em;   /* Sora, pe titluri */
   --ls-eyebrow: 0.08em;    /* eyebrow UPPERCASE */
+  --ls-button: 0.04em;     /* butoane — ~0,75px la --fs-lead; aerisește textul bold */
 
   /* ---- Spacing --------------------------------------------------------- */
   --space-1: 0.25rem;
