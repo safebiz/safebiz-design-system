@@ -54,7 +54,7 @@ Repo-ul are **14 componente**. Batch 1 le refolosește:
 | pill de categorie / etichetă | **`Badge`** (`default` / `success` / `ink` / `outline`) |
 | card de articol | **`Card`** — alb, border 1px, radius 22, shadow-sm → shadow-md + `translateY(-4px)` |
 | deschidere de secțiune | **`SectionHeading`** — eyebrow + H2 Sora + subtitlu |
-| butoane | **`Button`** — `primary` / `secondary` / `on-dark` |
+| butoane | **`Button`** — `primary` / `secondary` / `on-dark` / `ghost-on-dark`. Tipografia lui e blocată de Avertisment 6: `--fs-lead` + `--fw-bold` + `--ls-button`, text alb pe `primary` |
 | **CTA amplu pe fundal închis** | **secțiunea Flagship** — `background: ink`, grid 1.4fr/0.9fr, eyebrow accent-light, H2 alb, p alb 85%, CTA la dreapta |
 | **CTA card deschis** | **CTA band** — card `accent-light`, centrat, **fără border, fără shadow, hover dezactivat** |
 | acordeon | **`FAQ`** — max-width 820px, centrat, hairline sus/jos, iconiță `+` care se rotește 45° |
@@ -118,16 +118,28 @@ Alb pe fundal închis = **`var(--color-text-on-dark)`**, nu `#fff`. Singura exce
 
 Pentru numerale decorative mari (01/02/03) pe fundal deschis folosește **`--color-brand-hover`** (Fern `#3a7d44`) — **4,74:1** pe bg-alt. Zomp ar da 2,90:1, sub pragul de 3:1 pentru text mare. Pe fundal ink, accent-light e corect.
 
-### 🔴 Avertisment 6 — pe fill Zomp și Success, textul e INK, nu alb
+### 🔴 Avertisment 6 — pe fill Zomp și Success, textul e INK — cu o singură excepție
 
-Zomp și Success sunt destul de deschise încât albul să cadă sub prag:
+Zomp și Success sunt destul de deschise încât albul să cadă sub pragul de **text normal**:
 
 | | alb | ink |
 |---|---|---|
 | pe `--color-brand` `#14a68b` | 3,06:1 ❌ | **5,27:1 ✅** |
 | pe `--color-success` `#69b578` | 2,42:1 ❌ | **6,66:1 ✅** |
 
-Deci butonul primary, `Badge variant="brand"`, paginarea activă și glifele ✓ din pastilele verzi folosesc **`var(--text-on-brand)`** / **`var(--text-on-success)`** — ambele = ink. Paleta rămâne LOCKED; se schimbă doar culoarea de deasupra.
+Deci `Badge variant="brand"`, paginarea activă, pastila de limbă activă și glifele ✓ din pastilele verzi folosesc **`var(--text-on-brand)`** / **`var(--text-on-success)`** — ambele = ink. Toate sunt `--fs-small`, deci pragul lor e 4,5:1 și albul chiar pică. Paleta rămâne LOCKED; se schimbă doar culoarea de deasupra.
+
+**EXCEPȚIA — butonul `primary` are text ALB.** Nu fiindcă arată mai bine, ci fiindcă e singurul element de pe fill Zomp care intră în categoria WCAG **„text mare"**: la `--fs-lead` (19px) + `--fw-bold` pragul coboară la 3:1, iar albul dă 3,06:1 ✅ (vezi ultimul rând al §3). Prin urmare, în `Button.jsx`:
+
+| | valoare |
+|---|---|
+| `fontSize` | **`var(--fs-lead)`** (nu `--fs-body`) |
+| `fontWeight` | **`var(--fw-bold)`** (nu `--fw-semibold`) |
+| `letterSpacing` | **`var(--ls-button)`** — token existent, 0.04em |
+| `color` la `primary` | **`var(--color-text-on-dark)`** |
+| `color` la `secondary` **pe hover** | **`var(--color-text-on-dark)`** — hover-ul umple cu Zomp, deci moștenește aceeași regulă |
+
+🔴 **Cele trei sunt un pachet, nu trei preferințe.** Dacă cobori butonul la `--fs-body` sau la `--fw-semibold`, albul iese din „text mare" și devine neconform la 3,06:1 — atunci textul trebuie să se întoarcă pe ink. **Nu schimba tipografia butonului fără să schimbi și culoarea.** `--text-on-brand` rămâne ink pentru toți ceilalți consumatori — nu-l redefini ca să faci butonul alb.
 
 Albul rămâne corect pe **ink** (`--color-text-on-dark`) și pe hover-ul Fern al butonului primary (5,04:1).
 

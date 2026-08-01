@@ -39,18 +39,27 @@ a:hover { color: var(--color-brand-hover); }
 /* ---- Buttons ----------------------------------------------------------- */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
-  font-family: var(--font-body); font-weight: var(--fw-semibold); font-size: var(--fs-body);
+  font-family: var(--font-body); font-weight: var(--fw-bold); font-size: var(--fs-lead);
+  letter-spacing: var(--ls-button); line-height: 1;
   padding: 0.85rem 1.6rem; min-height: var(--tap-min); border-radius: var(--radius-pill); border: 2px solid transparent;
   cursor: pointer; transition: all var(--transition); text-decoration: none;
 }
-/* D8 — text pe fill Zomp e INK, nu alb: alb dă 3,06:1 (sub 4,5:1), ink dă 5,27:1.
-   Paleta rămâne neatinsă, Zomp rămâne culoarea CTA-ului. */
-.btn--primary { background: var(--color-brand); color: var(--text-on-brand); }
+/* D8 revizuit — textul pe fill Zomp e ALB, nu ink, DAR numai fiindcă butonul e
+   --fs-lead (19,2px) + --fw-bold: asta îl duce în categoria WCAG „text mare",
+   unde pragul e 3:1, iar albul pe Zomp dă 3,06:1 ✅. La --fs-body/semibold (cum
+   era înainte) albul ar fi picat — 3,06:1 sub 4,5:1. Mărimea E argumentul, deci
+   nu coborî tipografia butonului fără să întorci textul pe ink.
+   Badge-urile rămân pe ink: sunt --fs-small, prag 4,5:1. */
+.btn--primary { background: var(--color-brand); color: var(--color-text-on-dark); }
 .btn--primary:hover { background: var(--color-brand-hover); color: var(--color-text-on-dark); }
 .btn--secondary { background: transparent; color: var(--text-link); border-color: var(--color-brand); }
-.btn--secondary:hover { background: var(--color-brand); color: var(--text-on-brand); }
+.btn--secondary:hover { background: var(--color-brand); color: var(--color-text-on-dark); }
 .btn--on-dark { background: var(--color-text-on-dark); color: var(--color-ink); }
 .btn--on-dark:hover { background: var(--color-accent-light); }
+/* CTA secundar pe hero / benzi ink. Exista deja in Button.jsx din Claude Design;
+   il aducem si aici ca repo-ul sa nu ramana in urma componentei generate. */
+.btn--ghost-on-dark { background: transparent; color: var(--color-text-on-dark); border-color: var(--color-text-on-dark); }
+.btn--ghost-on-dark:hover { background: var(--color-text-on-dark); color: var(--color-ink); }
 
 /* ---- Badge ------------------------------------------------------------- */
 .badge {
