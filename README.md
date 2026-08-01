@@ -82,6 +82,36 @@ Sentence case în body · Title Case selectiv la titluri · eyebrow UPPERCASE cu
 ### Sursa umană și direcția de sincronizare
 `voice.ts` și `phrases.ts` sunt **oglinda** fișierelor din `projects/safebiz/branding/` (`voice.md`, `forbidden_phrases.txt`, `signature_phrases.txt`). Sincronizarea merge **doar** dinspre `branding/` spre repo. Nu edita regulile aici întâi — s-ar crea o a patra sursă care se învechește.
 
+## Mobile-first — regulă de sistem (OBLIGATORIE)
+
+Stilurile de **bază** din `app.css` sunt cele de **telefon**. Tot ce e mai mare se adaugă prin `@media (min-width: …)`. **Nu introduce `max-width`** — ar inversa direcția sistemului.
+
+Trei praguri, atât: **640px** · **900px** · **1200px**.
+
+| Regulă | Valoare |
+|---|---|
+| Zonă minimă de atins (înălțime **și** lățime) | `--tap-min: 44px` — orice link, buton, control |
+| Font minim în inputuri | `1rem` — sub 16px, Safari pe iOS dă zoom la focus |
+| Padding lateral | `1rem` pe mobil → `1.5rem` de la 640px |
+| Grile | o coloană pe mobil, se lățesc progresiv |
+| Header | bară de 60px + meniu desfășurabil; un rând de la 900px |
+| Lățimi minime în px pe conținut | **interzise** — garantează depășirea pe ecran mic |
+| `prefers-reduced-motion` | respectat (inclusiv `.card:hover`) |
+
+**Verificare, obligatorie înainte de push:**
+
+```bash
+node C:/MasterC-data/wat/tools/responsive-audit.js --url http://localhost:4173/ --open-selector ".header__toggle"
+```
+
+Exit 0 = trece. Exit 1 = cel puțin un prag cade, cu lista exactă a defectelor.
+
+> **De ce e scris aici:** până la 2026-07-31 acest template era desktop-first și avea
+> `@media (max-width: 720px) { .header__nav { display: none } }` — adică pe telefon
+> site-ul rămânea **fără navigație**, ascunsă fără nimic în loc. Plus 11 ținte de
+> atingere sub 44px. Fiecare client clonat de aici moștenea problemele.
+> Acum trece auditul la 320 / 375 / 768 / 900 / 1024 / 1440.
+
 ## Rulare locală (opțional)
 ```bash
 npm install
