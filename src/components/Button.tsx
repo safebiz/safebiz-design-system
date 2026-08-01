@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-type Variant = 'primary' | 'secondary' | 'on-dark'
+type Variant = 'primary' | 'secondary' | 'on-dark' | 'ghost-on-dark'
 
 export function Button({
   children,
