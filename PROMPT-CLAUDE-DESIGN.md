@@ -674,3 +674,22 @@ alocuri, și nu are niciun element vizual în afara componentelor. Reguli întâ
 
 **Condiții de livrare:** ambele previzualizări (1280 + 390×844) refăcute; raport final: unde
 pagina tot nu respiră după aceste schimbări — cu propunerea ta, fără să o aplici.
+
+### 14.5 Defecte MĂSURATE pe exportul rundei 1 — se repară odată cu §14.4
+
+Fondatorul a exportat `Safebiz Creare Site Prezentare.html` și pagina a fost verificată în browser
+real la 390×844. Conținutul e 100% fidel datelor (verificat programatic, frază cu frază). Trei
+defecte de mobil, toate măsurate, nu presupuse:
+
+1. **Headerul de mobil NU există.** La 390px se randează navul complet de desktop (5 linkuri + CTA,
+   582px lățime) — fără hamburger, fără vreo regulă care să-l ascundă. E recidiva exactă a
+   defectului din Batch 3/4; regula de atunci rămâne: butonul hamburger există în DOM, iar
+   regulile de helmet dețin comutarea — zero `display` inline pe butoane.
+2. **Derulare orizontală la 390px** (scrollWidth 760 vs viewport) — cauzată de navul de mai sus.
+   După fix, pagina trebuie să nu aibă NICIO derulare orizontală la 390.
+3. **Bara CTA lipită jos pe mobil lipsește din export.** Dacă a fost implementată doar în starea
+   de Tweak „390", mut-o în comportamentul implicit al paginii (media query reală), nu în comutator
+   de previzualizare: exportul și pagina finală trebuie să fie responsive REAL, nu pe stări.
+
+Criteriu de acceptare pentru §14.4 + §14.5 împreună: exportul HTML deschis într-un browser la
+390×844 are meniu funcțional, zero overflow orizontal și bara CTA jos — fără nicio intervenție.
