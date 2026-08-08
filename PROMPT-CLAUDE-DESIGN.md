@@ -632,3 +632,45 @@ componente noi permise: **una** (lista cu bife verzi), plus adaptarea `PricingPl
 4. JSON-LD nu se generează aici (garda din §5 rămâne) — schema vine din alt sistem.
 5. Raport final pe §12 plus: unde ai simțit nevoia să tai text (și n-ai făcut-o) — ca fondatorul
    să știe unde designul și copy-ul se tensionează.
+
+### 14.4 Runda 2 — imagini și aer (feedback fondator pe prima livrare)
+
+Prima livrare e acceptată ca structură. Două probleme de rezolvat: pagina e prea densă în text pe
+alocuri, și nu are niciun element vizual în afara componentelor. Reguli întâi, sarcini apoi.
+
+**Regula textului se NUANȚEAZĂ, nu se ridică:**
+
+- Cuvintele rămân verbatim — nicio reformulare, niciun sinonim, nimic tăiat.
+- SE PERMITE segmentarea la granițe de frază: o frază întreagă poate deveni un item de listă, un
+  lead separat sau un pull-quote, cu cuvintele exact cum sunt.
+- O singură spargere de frază e permisă, exact aceasta: titlul blocului de licențe devine
+  eyebrow „Avantajul pe care puține agenții îl oferă" + H2 „Licențele premium sunt incluse".
+
+**Imagini — cu constrângerea §6 (pagina se traduce în Kadence) mereu în minte:**
+
+1. **Hero, coloana dreaptă:** un mockup de browser stilizat (fereastră cu bara de sus + blocuri
+   „greeked" — bare de text, nu text fals lizibil) care sugerează un site de prezentare curat.
+   FĂRĂ brand inventat, FĂRĂ conținut lizibil. Alternativ, păstrează caseta de cifre dacă
+   mockupul nu iese curat din tokeni.
+2. **`problema`:** fraza „Un prompt îți face un site. Nu îți face un site bun." iese din paragraf
+   și devine pull-quote vizual (patternul de citat din §11) — e cârligul paginii, trateaz-o ca atare.
+   Restul paragrafelor primesc mai mult alb între ele.
+3. **Sloturi de imagine reale, nu decor inventat:** în `continuitate` și, opțional, lângă `proces`,
+   desenează câte un slot de imagine 16:10 etichetat („fotografie / captură reală — vine de la
+   fondator") — ca layoutul să fie gata pentru imagini adevărate, fără să inventezi conținut vizual.
+4. Interzis, ca și până acum: fotografii de oameni, sigle, capturi de site-uri „reale" inventate.
+
+**Aerisirea, secțiune cu secțiune:**
+
+- **`pret`:** descrierea fiecărui card se desface la granițe de frază — prima frază rămâne lead sub
+  numele pachetului, frazele următoare devin bife în card. Nota TVA devine casetă discretă de info
+  (bg-alt, iconiță info), textul integral, nu paragraf plutitor.
+- **`continuitate`:** al doilea paragraf (găzduire, actualizări, monitorizare, backup, suport) se
+  desface în mini-listă cu bife la granițe de propoziție — cuvintele identice. Primul paragraf
+  rămâne proză.
+- **`garantii`:** cele 3 blocuri devin 3 carduri; primul („Dacă întârziem noi, plătim noi.")
+  primește greutate vizuală clară.
+- **`cuFara`, `faq`, `listaInclusa`** rămân cum sunt.
+
+**Condiții de livrare:** ambele previzualizări (1280 + 390×844) refăcute; raport final: unde
+pagina tot nu respiră după aceste schimbări — cu propunerea ta, fără să o aplici.
