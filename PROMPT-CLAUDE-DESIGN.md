@@ -583,3 +583,52 @@ Pe lângă raportul standard din §12:
 1. **Dacă mega menu-ul cu 6 coloane încape** la 1160px fără să cobori sub scala de tipografie — și ce ai făcut dacă nu.
 2. **Ce se pierde** dacă meniul mobil trebuie să fie identic cu cel de desktop.
 3. Dacă ai avut nevoie de o stare pe care sloturile de header din Kadence **nu** o pot exprima (§13.2.1).
+
+## 14. Batch 5 — Pagina de vânzare REALĂ: „Creare site web de prezentare"
+
+Un singur ecran: **`Safebiz Creare Site Prezentare.html`** — prima INSTANȚĂ reală a șablonului
+de vânzare din §10, cu text final scris și confirmat de fondator.
+
+### 14.1 Regula care domină tot batch-ul: textul e DECIS
+
+Tot copy-ul vine din **`src/data/salespage-creare-site.ts`** și se folosește **VERBATIM** —
+nicio reformulare, nicio prescurtare, niciun sinonim, nicio completare. Ai libertate totală pe
+așezare, ritm vizual, ierarhie și alb — și zero libertate pe cuvinte. Dacă o secțiune „nu încape",
+schimbi layoutul, nu textul; dacă tot nu încape, raportezi la final, nu tai.
+
+De ce așa: pagina asta a trecut prin trei runde de feedback pe conținut. Fiecare frază e verificată
+factual (prețuri, termene, garanții — toate din registrul de fapte al firmei). O reformulare
+„nevinovată" poate transforma o afirmație adevărată într-una neacoperită.
+
+### 14.2 Maparea secțiunilor pe componente
+
+Ordinea de mai jos e ordinea de citit a paginii — e un fir, nu o listă. Refolosește tot ce există;
+componente noi permise: **una** (lista cu bife verzi), plus adaptarea `PricingPlans` la 2 coloane.
+
+| # | Secțiune (cheia din date) | Componentă |
+|---|---|---|
+| 1 | `hero` | Hero de serviciu (§10.1): gradient, H1 = `hero.h1` EXACT (poartă sintagma SEO), intro + promisiunea ca lead, 2 butoane |
+| 2 | `trustStrip` | Trust strip existent, 4 iteme |
+| 3 | `problema` | Proză pe 1 coloană, max 720px lățime de text; al doilea paragraf conține firul AI — dă-i respirație (e hook-ul paginii), NU-l transforma în listă |
+| 4 | `ceInclude` | Titlu + 3 infoboxuri (§10.4), textele complete din `casete` |
+| 5 | `listaInclusa` | 🎯 COMPONENTĂ NOUĂ „Checklist": listă cu bife verzi `--color-success` (iconiță check în cerc, text ink), 2 coloane pe desktop → 1 pe mobil, 10 iteme |
+| 6 | `proces` | `Timeline` existent (4 pași) |
+| 7 | `pret` | `PricingPlans` ADAPTAT la **2 coloane** (nu 3): cardul 2 = `plan--highlight`. Sub carduri, `pret.notaTva` ca paragraf muted centrat — face parte din secțiune, nu e disclaimer de subsol |
+| 8 | `cuFara` | 2 coloane: stânga bife verzi (`cu`), dreapta X-uri neutre (`fara`) — NU roșu (§3 avertisment 2); sub ele, `semnatura` ca citat evidențiat (pattern „Citat" din §11) — e fraza-semnătură a firmei |
+| 9 | `ceNuInclude` | Componenta „Ce NU include" din §10.8 (minus în cerc, ton neutru), 5 iteme |
+| 10 | `garantii` | 3 blocuri titlu+text; primul („Dacă întârziem noi, plătim noi") primește greutate vizuală — e singura garanție asumată în scris a firmei |
+| 11 | `continuitate` | Proză 2 paragrafe + sub-blocul `licente` ca bandă ink (à la „diferențiator" din §10, ecran 5) — argumentul licențelor premium incluse e diferențiator, tratează-l ca atare |
+| 12 | `multilingv` | Secțiune scurtă pe bg-alt, titlu + un paragraf; nu-i da mai mult decât cere |
+| 13 | `dovada` | 🔴 `slot: true` — desenează SLOT vizibil cu eticheta din `slotNote`. NU inventa clienți, sigle, capturi sau cifre |
+| 14 | `faq` | `FAQ` existent, toate cele 10 întrebări |
+| 15 | `ctaFinal` | Flagship refolosit + formularul (câmpurile din §10.13, se leagă la SureForms existent) |
+
+### 14.3 Condiții de livrare
+
+1. Ambele previzualizări din prima: **1280** și **390×844** (§3b integral).
+2. **Un singur CTA principal** vizibil per viewport (regula din §5); „Cere o ofertă" din hero și
+   Flagship-ul final sunt același verb, nu concurenți.
+3. H1 conține sintagma „creare site web de prezentare" NEfragmentată (vine deja corect din date).
+4. JSON-LD nu se generează aici (garda din §5 rămâne) — schema vine din alt sistem.
+5. Raport final pe §12 plus: unde ai simțit nevoia să tai text (și n-ai făcut-o) — ca fondatorul
+   să știe unde designul și copy-ul se tensionează.
