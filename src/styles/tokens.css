@@ -65,7 +65,14 @@
   /* ---- Gradiente ------------------------------------------------------- */
   /* --gradient-hero: SINGURUL gradient de fundal. Doar pe banda de hero.
      --gradient-brand: derivat din scutul logo-ului, doar decorativ, rar. */
-  --gradient-hero: linear-gradient(135deg, #0a2239 0%, #123049 60%, #3a7d44 140%);
+  /* 2026-08-25: valoarea veche continea #123049, un albastru mediu care nu exista in
+     niciun token si in niciun slot de paleta — scris de mana, deci o schimbare de brand
+     nu il atingea. Acum gradientul e construit din culorile declarate mai sus. */
+  --gradient-hero: linear-gradient(135deg, var(--color-ink) 0%, var(--color-ink) 52%, var(--color-brand-hover) 135%);
+  /* Pe ecran ingust si inalt diagonala isi consuma tot drumul in colt: verdele apare
+     doar in ultimii centimetri si banda arata plata. Pe mobil verdele devine o lumina
+     ancorata in coltul de jos-dreapta, iar textul ramane pe fundal inchis curat. */
+  --gradient-hero-mobile: radial-gradient(120% 70% at 100% 100%, var(--color-brand-hover) 0%, var(--color-ink) 70%);
   --gradient-brand: linear-gradient(160deg, #14a68b 0%, #3a7d44 100%);
 
   /* ---- INTERZIS: roșu / portocaliu pentru CTA (nu se aliniază paletei) -- */
